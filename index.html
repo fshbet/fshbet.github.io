@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Index of eight projects: AI agents, automation frameworks, data platforms and trading infrastructure.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2016%2016%27%3E%3Ctext%20y=%2713%27%20font-size=%2713%27%3E%F0%9F%93%87%3C/text%3E%3C/svg%3E">
+<title>Code Archive — fshbet</title>
+<style>
+  :root {
+    --paper:   #FAF9F6;
+    --surface: #FFFFFF;
+    --sunken:  #F2F0EA;
+    --ink:     #171A1F;
+    --ink-2:   #565C66;
+    --ink-3:   #868C96;
+    --rule:    #E3DFD7;
+    --accent:  #A8552F;
+    --accent-soft: #A8552F1F;
+    --ok:      #2E6F4E;
+    --ok-soft: #2E6F4E1A;
+    --warn:    #8A6512;
+    --warn-soft: #8A65121A;
+    --bar:     #A8552F;
+    --bar-track: #E9E5DC;
+
+    --mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace, "SF Mono", Menlo, monospace;
+    --sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:   #131519;
+      --surface: #1A1D23;
+      --sunken:  #202430;
+      --ink:     #ECEAE5;
+      --ink-2:   #A2A9B3;
+      --ink-3:   #737A85;
+      --rule:    #2B2F38;
+      --accent:  #DB8656;
+      --accent-soft: #DB865626;
+      --ok:      #63BC8E;
+      --ok-soft: #63BC8E1F;
+      --warn:    #D4AA51;
+      --warn-soft: #D4AA511F;
+      --bar:     #DB8656;
+      --bar-track: #262A33;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:   #131519;
+    --surface: #1A1D23;
+    --sunken:  #202430;
+    --ink:     #ECEAE5;
+    --ink-2:   #A2A9B3;
+    --ink-3:   #737A85;
+    --rule:    #2B2F38;
+    --accent:  #DB8656;
+    --accent-soft: #DB865626;
+    --ok:      #63BC8E;
+    --ok-soft: #63BC8E1F;
+    --warn:    #D4AA51;
+    --warn-soft: #D4AA511F;
+    --bar:     #DB8656;
+    --bar-track: #262A33;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 24px 96px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+
+  /* ─── masthead ─────────────────────────────── */
+  .masthead {
+    padding: 56px 0 28px;
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-family: var(--mono);
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .lede {
+    color: var(--ink-2);
+    max-width: 60ch;
+    margin: 14px 0 0;
+    font-size: 16.5px;
+  }
+  .stamp {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.9;
+    color: var(--ink-3);
+    text-align: right;
+    white-space: nowrap;
+  }
+  .stamp b { color: var(--ink-2); font-weight: 600; }
+
+  /* ─── totals ───────────────────────────────── */
+  .totals {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 0 0 56px;
+  }
+  .totals div { background: var(--surface); padding: 20px 18px; }
+  .totals .n {
+    font-family: var(--mono);
+    font-size: 27px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    display: block;
+    line-height: 1.15;
+  }
+  .totals .k {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: block;
+    margin-top: 7px;
+  }
+
+  h2 {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 6px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .sub { color: var(--ink-2); font-size: 15px; margin: 12px 0 26px; max-width: 68ch; }
+  section { margin-bottom: 60px; }
+
+  /* ─── token weight chart ───────────────────── */
+  .chart { display: flex; flex-direction: column; gap: 3px; }
+  .row {
+    display: grid;
+    grid-template-columns: minmax(150px, 200px) 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 7px 0;
+  }
+  .row .name {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .track { background: var(--bar-track); height: 22px; display: flex; }
+  .fill { background: var(--bar); height: 100%; flex: 0 0 auto; }
+  .fill.docs { background: var(--accent-soft); border-right: 1px solid var(--accent); }
+  .row .v {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    min-width: 68px;
+    text-align: right;
+  }
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.05em;
+  }
+  .legend span { display: flex; align-items: center; gap: 7px; }
+  .sw { width: 13px; height: 13px; display: inline-block; }
+
+  /* ─── project cards ────────────────────────── */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .card { background: var(--surface); padding: 24px 22px; display: flex; flex-direction: column; gap: 13px; }
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .card h3 { font-family: var(--mono); font-size: 16.5px; font-weight: 700; margin: 0; letter-spacing: -0.01em; line-height: 1.3; }
+  .repo { font-family: var(--mono); font-size: 11.5px; color: var(--accent); margin-top: 4px; word-break: break-all; }
+  .chip {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    white-space: nowrap;
+    font-weight: 700;
+    border: 1px solid;
+  }
+  .chip.a { color: var(--ok); background: var(--ok-soft); border-color: var(--ok); }
+  .chip.b { color: var(--warn); background: var(--warn-soft); border-color: var(--warn); }
+  .card p { margin: 0; font-size: 14.5px; color: var(--ink-2); line-height: 1.55; }
+  .stack { font-family: var(--mono); font-size: 11px; color: var(--ink-3); line-height: 1.7; letter-spacing: 0.02em; }
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding-top: 13px;
+    border-top: 1px solid var(--rule);
+    margin-top: auto;
+  }
+  .metrics div { display: flex; flex-direction: column; gap: 2px; }
+  .metrics .mv { font-family: var(--mono); font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .metrics .mk { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+  .flag { font-size: 13px; color: var(--warn); display: flex; gap: 8px; align-items: baseline; }
+  .flag::before { content: "▲"; font-size: 8px; position: relative; top: -2px; }
+
+  /* ─── tables / notes ───────────────────────── */
+  .scroll { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 560px; }
+  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--rule); }
+  th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 700;
+    border-bottom: 1px solid var(--ink-3);
+  }
+  td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+  td code, p code, li code { font-family: var(--mono); font-size: 12.5px; background: var(--sunken); padding: 2px 6px; }
+
+  .callout { border-left: 3px solid var(--accent); background: var(--sunken); padding: 20px 24px; }
+  .callout h3 { font-family: var(--mono); font-size: 14px; margin: 0 0 10px; letter-spacing: 0.02em; }
+  .callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+  .callout ul { margin: 0; padding-left: 20px; }
+  .callout li { margin-bottom: 7px; color: var(--ink-2); font-size: 14.5px; }
+
+  ol.steps { counter-reset: s; list-style: none; padding: 0; margin: 0; }
+  ol.steps > li {
+    counter-increment: s;
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  ol.steps > li::before {
+    content: counter(s);
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    padding-top: 2px;
+  }
+  ol.steps strong { display: block; margin-bottom: 4px; }
+  ol.steps p { margin: 0; color: var(--ink-2); font-size: 14.5px; }
+
+  pre {
+    background: var(--sunken);
+    border: 1px solid var(--rule);
+    padding: 15px 18px;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.75;
+    margin: 14px 0 0;
+  }
+  footer {
+    border-top: 1px solid var(--rule);
+    margin-top: 24px;
+    padding-top: 22px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+    line-height: 1.9;
+  }
+  @media (max-width: 620px) {
+    .row { grid-template-columns: 1fr auto; }
+    .row .track { display: none; }
+    .stamp { text-align: left; }
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Project index</p>
+      <h1>Code Archive</h1>
+      <p class="lede">Eight projects — AI agents, automation frameworks, data platforms and trading infrastructure. Each one documented, measured, and honest about what it does and does not yet do.</p>
+    </div>
+    <div class="stamp">
+      Updated <b>13 Aug 2026</b><br>
+      GitHub <b>@fshbet</b><br>
+      Languages <b>8</b><br>
+      Repositories <b>8</b>
+    </div>
+  </header>
+
+  <div class="totals">
+    <div><span class="n">8</span><span class="k">Repositories</span></div>
+    <div><span class="n">1.05M</span><span class="k">Total tokens</span></div>
+    <div><span class="n">1,014</span><span class="k">Source files</span></div>
+    <div><span class="n">131,459</span><span class="k">Lines of code</span></div>
+    <div><span class="n">174k</span><span class="k">Doc tokens</span></div>
+  </div>
+
+  <section>
+    <h2>Token weight</h2>
+    <p class="sub">Measured with <code>cl100k_base</code> across source, tests, docs, and config — excluding dependencies, virtualenvs, and build output. Solid bar is code and tests; the lighter segment is documentation.</p>
+    <div class="chart">
+
+      <div class="row">
+        <span class="name">ai-freelance-hunter</span>
+        <span class="track"><span class="fill" style="width:95.4%"></span><span class="fill docs" style="width:4.6%"></span></span>
+        <span class="v">360,393</span>
+      </div>
+      <div class="row">
+        <span class="name">ugaf-development-kit</span>
+        <span class="track"><span class="fill" style="width:67.5%"></span><span class="fill docs" style="width:20.6%"></span></span>
+        <span class="v">317,541</span>
+      </div>
+      <div class="row">
+        <span class="name">bambu-a1-camera-monitor</span>
+        <span class="track"><span class="fill" style="width:12.5%"></span><span class="fill docs" style="width:14.9%"></span></span>
+        <span class="v">98,697</span>
+      </div>
+      <div class="row">
+        <span class="name">gameagent-uagip</span>
+        <span class="track"><span class="fill" style="width:22.2%"></span><span class="fill docs" style="width:4.4%"></span></span>
+        <span class="v">95,728</span>
+      </div>
+      <div class="row">
+        <span class="name">ai-lean-six-sigma-analyst</span>
+        <span class="track"><span class="fill" style="width:21.1%"></span><span class="fill docs" style="width:1.2%"></span></span>
+        <span class="v">80,516</span>
+      </div>
+      <div class="row">
+        <span class="name">ai-dashboard-platform</span>
+        <span class="track"><span class="fill" style="width:13.5%"></span><span class="fill docs" style="width:2.0%"></span></span>
+        <span class="v">56,167</span>
+      </div>
+      <div class="row">
+        <span class="name">daagent-dashboard</span>
+        <span class="track"><span class="fill" style="width:7.9%"></span><span class="fill docs" style="width:0.3%"></span></span>
+        <span class="v">29,500</span>
+      </div>
+      <div class="row">
+        <span class="name">nse-derivatives-feed</span>
+        <span class="track"><span class="fill" style="width:2.9%"></span><span class="fill docs" style="width:0.2%"></span></span>
+        <span class="v">11,214</span>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--bar)"></i> Code &amp; tests — 848,140</span>
+      <span><i class="sw" style="background:var(--accent-soft);border:1px solid var(--accent)"></i> Documentation — 173,669</span>
+      <span>Config — 27,947</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Complete</h2>
+    <p class="sub">Documented end to end, tested, and running. Each carries an <code>INDEX.md</code> written from its actual source.</p>
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-top">
+          <div>
+            <h3>UGAF</h3>
+            <div class="repo">ugaf-development-kit</div>
+          </div>
+          <span class="chip a">Ready</span>
+        </div>
+        <p>Plugin-based automation framework for Android games and apps, driven from the desktop. Web control panel handles device detection, live screen, tap/swipe, and emulator management with no code required.</p>
+        <div class="stack">Python 3.13 · FastAPI · ADB · OpenCV · structlog</div>
+        <div class="metrics">
+          <div><span class="mv">317k</span><span class="mk">Tokens</span></div>
+          <div><span class="mv">272</span><span class="mk">Files</span></div>
+          <div><span class="mv">81</span><span class="mk">Tests</span></div>
+          <div><span class="mv">51</span><span class="mk">Docs</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div>
+            <h3>Bambu A1 Camera Monitor</h3>
+            <div class="repo">bambu-a1-camera-monitor</div>
+          </div>
+          <span class="chip a">Ready</span>
+        </div>
+        <p>Live streaming, snapshots, and timelapse capture for a Bambu A1 3D printer, running on a Raspberry Pi Zero 2 W with an OV5647 camera. Ships as a systemd service.</p>
+        <div class="stack">Python · Flask · picamera2 · libcamera · FFmpeg</div>
+        <div class="metrics">
+          <div><span class="mv">99k</span><span class="mk">Tokens</span></div>
+          <div><span class="mv">48</span><span class="mk">Files</span></div>
+          <div><span class="mv">3</span><span class="mk">Tests</span></div>
+          <div><span class="mv">28</span><span class="mk">Docs</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div>
+            <h3>AI Lean Six Sigma Analyst</h3>
+            <div class="repo">ai-lean-six-sigma-analyst</div>
+          </div>
+          <span class="chip a">Ready</span>
+        </div>
+        <p>Upload a dataset, get DMAIC-structured root-cause analysis. Python computes every statistic; the model only interprets structured evidence — and the app still works with the LLM switched off.</p>
+        <div class="stack">Streamlit · pandas · SciPy · statsmodels · Plotly</div>
+        <div class="metrics">
+          <div><span class="mv">81k</span><span class="mk">Tokens</span></div>
+          <div><span class="mv">69</span><span class="mk">Files</span></div>
+          <div><span class="mv">17</span><span class="mk">Tests</span></div>
+          <div><span class="mv">3</span><span class="mk">Docs</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Working, with known gaps</h2>
+    <p class="sub">Functional and worth reading, but not finished. Each <code>INDEX.md</code> states its gaps plainly rather than papering over them.</p>
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-top">
+          <div>
+            <h3>AI Freelance Hunter</h3>
+            <div class="repo">ai-freelance-hunter</div>
+          </div>
+          <span class="chip b">Gaps noted</span>
+        </div>
+        <p>Crawls ten freelance platforms, deduplicates and scores every posting on feasibility, profitability, competition and risk, then drafts proposals. The largest project here.</p>
+        <div class="stack">FastAPI · Next.js 14 · PostgreSQL · Redis · Celery · K8s</div>
+        <div class="metrics">
+          <div><span class="mv">360k</span><span class="mk">Tokens</span></div>
+          <div><span class="mv">368</span><span class="mk">Files</span></div>
+          <div><span class="mv">54</span><span class="mk">Tests</span></div>
+          <div><span class="mv">9</span><span class="mk">Docs</span></div>
+        </div>
+        <div class="flag">No README — INDEX.md now serves as the front door</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div>
+            <h3>UAGIP GameAgent</h3>
+            <div class="repo">gameagent-uagip</div>
+          </div>
+          <span class="chip b">Gaps noted</span>
+        </div>
+        <p>Autonomous game-playing agents: capture, vision, state, decision, action, memory. Foundation, capture engine, ADB adapter, vision layer and dataset platform all shipped through tag v0.6.</p>
+        <div class="stack">Python · OpenCV · EasyOCR · YOLO · LangChain · Ollama</div>
+        <div class="metrics">
+          <div><span class="mv">96k</span><span class="mk">Tokens</span></div>
+          <div><span class="mv">148</span><span class="mk">Files</span></div>
+          <div><span class="mv">14</span><span class="mk">Tests</span></div>
+          <div><span class="mv">65</span><span class="mk">Docs</span></div>
+        </div>
+        <div class="flag">MODULE_STATUS.md is stale — understates real progress</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div>
+            <h3>AI Dashboard Platform</h3>
+            <div class="repo">ai-dashboard-platform</div>
+          </div>
+          <span class="chip b">Gaps noted</span>
+        </div>
+        <p>CSV, XLSX or JSON in, interactive audience-segmented dashboard out, via a five-node AI pipeline. The AI emits only JSON specifications; the frontend owns all rendering.</p>
+        <div class="stack">Next.js 14 · Express · TypeScript · n8n · ECharts · SQLite</div>
+        <div class="metrics">
+          <div><span class="mv">56k</span><span class="mk">Tokens</span></div>
+          <div><span class="mv">66</span><span class="mk">Files</span></div>
+          <div><span class="mv">0</span><span class="mk">Tests</span></div>
+          <div><span class="mv">8</span><span class="mk">Docs</span></div>
+        </div>
+        <div class="flag">No tests; duplicate snapshot left behind at GITHUB\Website</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div>
+            <h3>DAAgent</h3>
+            <div class="repo">daagent-dashboard</div>
+          </div>
+          <span class="chip b">Gaps noted</span>
+        </div>
+        <p>Upload a file, get a dashboard, then ask questions in plain English. A SQL agent writes the query and <code>sqlglot</code> validates it before it ever reaches the database.</p>
+        <div class="stack">FastAPI · PostgreSQL · Celery · Redis · sqlglot · Ollama</div>
+        <div class="metrics">
+          <div><span class="mv">30k</span><span class="mk">Tokens</span></div>
+          <div><span class="mv">29</span><span class="mk">Files</span></div>
+          <div><span class="mv">0</span><span class="mk">Tests</span></div>
+          <div><span class="mv">2</span><span class="mk">Docs</span></div>
+        </div>
+        <div class="flag">No test suite — the clearest next step</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div>
+            <h3>NSE Derivatives Feed</h3>
+            <div class="repo">nse-derivatives-feed</div>
+          </div>
+          <span class="chip b">Gaps noted</span>
+        </div>
+        <p>Streams live NSE option-chain data from the Upstox WebSocket into PostgreSQL and serves it over REST, tracking open-interest changes between ticks.</p>
+        <div class="stack">Node.js · Express · PostgreSQL · Upstox WS v2 · node-cron</div>
+        <div class="metrics">
+          <div><span class="mv">11k</span><span class="mk">Tokens</span></div>
+          <div><span class="mv">14</span><span class="mk">Files</span></div>
+          <div><span class="mv">1</span><span class="mk">Tests</span></div>
+          <div><span class="mv">2</span><span class="mk">Docs</span></div>
+        </div>
+        <div class="flag">Misnamed — it is a backend, not a frontend; CRA boilerplate remains</div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>How these are measured</h2>
+    <p class="sub">Every figure on this page is counted from source, not estimated.</p>
+    <div class="callout">
+      <h3>Methodology</h3>
+      <ul>
+        <li><strong>Tokens</strong> are counted with tiktoken <code>cl100k_base</code> across source, test, documentation and configuration files — the same encoding a language model would read them through.</li>
+        <li><strong>Excluded from every count:</strong> dependencies, virtual environments, lockfiles, generated API schemas, minified bundles and build output. What remains is authored code.</li>
+        <li><strong>Tests and documentation</strong> are reported separately from implementation, so each project's real ratio stays visible instead of being averaged away.</li>
+        <li>Each repository carries an <code>INDEX.md</code> written from its own source — architecture, usage, layout, and an explicit section naming what is missing.</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>
