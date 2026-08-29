@@ -2,8 +2,8 @@
 
 Personal project index, served at **<https://fshbet.github.io>**.
 
-A single static page summarising ten projects — AI agents, automation frameworks, data
-platforms, trading infrastructure and a parametric CAD enclosure — with token-level
+A single static page summarising eleven projects — AI agents, orchestration, automation
+frameworks, data platforms, trading infrastructure and a parametric CAD enclosure — with token-level
 measurements and an honest statement of what each project does and does not yet do.
 
 ## Contents

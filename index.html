@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Index of ten projects: AI agents, automation frameworks, data platforms, trading infrastructure and a parametric CAD enclosure.">
+<meta name="description" content="Index of eleven projects: AI agents, orchestration, automation frameworks, data platforms, trading infrastructure and a parametric CAD enclosure.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2016%2016%27%3E%3Ctext%20y=%2713%27%20font-size=%2713%27%3E%F0%9F%93%87%3C/text%3E%3C/svg%3E">
 <title>Code Archive — fshbet</title>
 <style>
@@ -319,22 +319,22 @@
     <div>
       <p class="eyebrow">Project index</p>
       <h1>Code Archive</h1>
-      <p class="lede">Ten projects — AI agents, automation frameworks, data platforms, trading infrastructure, and one parametric CAD enclosure. Each one documented, measured, and honest about what it does and does not yet do.</p>
+      <p class="lede">Eleven projects — AI agents, orchestration, automation frameworks, data platforms, trading infrastructure, and one parametric CAD enclosure. Each one documented, measured, and honest about what it does and does not yet do.</p>
     </div>
     <div class="stamp">
       Updated <b>29 Aug 2026</b><br>
       GitHub <b>@fshbet</b><br>
       Languages <b>9</b><br>
-      Repositories <b>10</b>
+      Repositories <b>11</b>
     </div>
   </header>
 
   <div class="totals">
-    <div><span class="n">10</span><span class="k">Repositories</span></div>
-    <div><span class="n">1.63M</span><span class="k">Total tokens</span></div>
-    <div><span class="n">1,253</span><span class="k">Source files</span></div>
-    <div><span class="n">171,800</span><span class="k">Lines of code</span></div>
-    <div><span class="n">303k</span><span class="k">Doc tokens</span></div>
+    <div><span class="n">11</span><span class="k">Repositories</span></div>
+    <div><span class="n">2.05M</span><span class="k">Total tokens</span></div>
+    <div><span class="n">1,472</span><span class="k">Source files</span></div>
+    <div><span class="n">224,369</span><span class="k">Lines of code</span></div>
+    <div><span class="n">365k</span><span class="k">Doc tokens</span></div>
   </div>
 
   <section>
@@ -346,6 +346,11 @@
         <span class="name">SBC</span>
         <span class="track"><span class="fill" style="width:80.1%"></span><span class="fill docs" style="width:19.9%"></span></span>
         <span class="v">553,001</span>
+      </div>
+      <div class="row">
+        <span class="name">sentinel-orchestrator</span>
+        <span class="track"><span class="fill" style="width:64.5%"></span><span class="fill docs" style="width:11.2%"></span></span>
+        <span class="v">418,667</span>
       </div>
       <div class="row">
         <span class="name">ai-freelance-hunter</span>
@@ -394,9 +399,9 @@
       </div>
     </div>
     <div class="legend">
-      <span><i class="sw" style="background:var(--bar)"></i> Code &amp; tests — 1,171,154</span>
-      <span><i class="sw" style="background:var(--accent-soft);border:1px solid var(--accent)"></i> Documentation — 303,341</span>
-      <span>Config — 156,003</span>
+      <span><i class="sw" style="background:var(--bar)"></i> Code &amp; tests — 1,512,580</span>
+      <span><i class="sw" style="background:var(--accent-soft);border:1px solid var(--accent)"></i> Documentation — 365,253</span>
+      <span>Config — 171,332</span>
     </div>
   </section>
 
@@ -420,6 +425,24 @@
           <div><span class="mv">229</span><span class="mk">Files</span></div>
           <div><span class="mv">4</span><span class="mk">Tests</span></div>
           <div><span class="mv">52</span><span class="mk">Doc files</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div>
+            <h3>Sentinel Orchestrator</h3>
+            <div class="repo"><a href="https://github.com/fshbet/sentinel-orchestrator">sentinel-orchestrator</a></div>
+          </div>
+          <span class="chip a">Ready</span>
+        </div>
+        <p>A domain-agnostic, MCP-first orchestration engine. Describe the objective, not the workflow — it decomposes the work, picks the capabilities, runs what it can in parallel, validates results and decides what to do on failure. No shipped agent roles, no hard-coded provider. 701 tests, with the multi-replica controls verified against a running Compose stack rather than only in unit tests.</p>
+        <div class="stack">Python · FastAPI · Pydantic · Typer · PostgreSQL · MCP · Apache-2.0</div>
+        <div class="metrics">
+          <div><span class="mv">419k</span><span class="mk">Tokens</span></div>
+          <div><span class="mv">219</span><span class="mk">Files</span></div>
+          <div><span class="mv">27</span><span class="mk">Tests</span></div>
+          <div><span class="mv">55</span><span class="mk">Doc files</span></div>
         </div>
       </article>
 
@@ -608,7 +631,7 @@
         <li><strong>Tokens</strong> are counted with tiktoken <code>cl100k_base</code> across source, test, documentation and configuration files — the same encoding a language model would read them through.</li>
         <li><strong>Excluded from every count:</strong> dependencies, virtual environments, lockfiles, generated API schemas, minified bundles and build output. What remains is authored code. For the CAD project that means the exported STL meshes are excluded — they are build output of the OpenSCAD source, which is what gets counted.</li>
         <li><strong>Tests and documentation</strong> are reported separately from implementation, so each project's real ratio stays visible instead of being averaged away.</li>
-        <li>Each software repository carries an <code>INDEX.md</code> written from its own source — architecture, usage, layout, and an explicit section naming what is missing. The CAD project carries <code>docs/design-notes.md</code> instead: the full measurement table, the coordinate transform, and the validation record.</li>
+        <li><strong>Most</strong> repositories carry an <code>INDEX.md</code> written from their own source — architecture, usage, layout, and an explicit section naming what is missing. Three carry their own documentation set instead: SBC, Sentinel (29 topic guides and 12 architecture decision records), and the CAD project, whose <code>docs/design-notes.md</code> holds the measurement table, the coordinate transform and the validation record.</li>
         <li><strong>One card reads differently.</strong> The enclosure has no test suite, so its third metric counts printed <em>parts</em> rather than tests. Everything else on this page is software.</li>
       </ul>
     </div>
