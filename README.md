@@ -2,9 +2,9 @@
 
 Personal project index, served at **<https://fshbet.github.io>**.
 
-A single static page summarising eight projects — AI agents, automation frameworks, data
-platforms and trading infrastructure — with token-level codebase measurements and an honest
-statement of what each project does and does not yet do.
+A single static page summarising ten projects — AI agents, automation frameworks, data
+platforms, trading infrastructure and a parametric CAD enclosure — with token-level
+measurements and an honest statement of what each project does and does not yet do.
 
 ## Contents
 
@@ -23,4 +23,5 @@ Edit `index.html` and push to `main`. GitHub Pages redeploys automatically.
 
 Token counts are produced with tiktoken `cl100k_base` across source, test, documentation and
 configuration files. Dependencies, virtual environments, lockfiles, generated API schemas,
-minified bundles and build output are excluded from every figure.
+minified bundles and build output are excluded from every figure — including the exported
+STL meshes of the CAD project, which are build output of its OpenSCAD source.

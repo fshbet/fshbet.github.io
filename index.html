@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Index of nine projects: AI agents, automation frameworks, data platforms and trading infrastructure.">
+<meta name="description" content="Index of ten projects: AI agents, automation frameworks, data platforms, trading infrastructure and a parametric CAD enclosure.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2016%2016%27%3E%3Ctext%20y=%2713%27%20font-size=%2713%27%3E%F0%9F%93%87%3C/text%3E%3C/svg%3E">
 <title>Code Archive — fshbet</title>
 <style>
@@ -316,22 +316,22 @@
     <div>
       <p class="eyebrow">Project index</p>
       <h1>Code Archive</h1>
-      <p class="lede">Nine projects — AI agents, automation frameworks, data platforms and trading infrastructure. Each one documented, measured, and honest about what it does and does not yet do.</p>
+      <p class="lede">Ten projects — AI agents, automation frameworks, data platforms, trading infrastructure, and one parametric CAD enclosure. Each one documented, measured, and honest about what it does and does not yet do.</p>
     </div>
     <div class="stamp">
-      Updated <b>13 Aug 2026</b><br>
+      Updated <b>29 Aug 2026</b><br>
       GitHub <b>@fshbet</b><br>
-      Languages <b>8</b><br>
-      Repositories <b>9</b>
+      Languages <b>9</b><br>
+      Repositories <b>10</b>
     </div>
   </header>
 
   <div class="totals">
-    <div><span class="n">9</span><span class="k">Repositories</span></div>
-    <div><span class="n">1.60M</span><span class="k">Total tokens</span></div>
-    <div><span class="n">1,243</span><span class="k">Source files</span></div>
-    <div><span class="n">169,825</span><span class="k">Lines of code</span></div>
-    <div><span class="n">284k</span><span class="k">Doc tokens</span></div>
+    <div><span class="n">10</span><span class="k">Repositories</span></div>
+    <div><span class="n">1.63M</span><span class="k">Total tokens</span></div>
+    <div><span class="n">1,253</span><span class="k">Source files</span></div>
+    <div><span class="n">171,800</span><span class="k">Lines of code</span></div>
+    <div><span class="n">303k</span><span class="k">Doc tokens</span></div>
   </div>
 
   <section>
@@ -380,15 +380,20 @@
         <span class="v">29,500</span>
       </div>
       <div class="row">
+        <span class="name">radxa-cubie-a5e-case</span>
+        <span class="track"><span class="fill" style="width:1.5%"></span><span class="fill docs" style="width:3.5%"></span></span>
+        <span class="v">27,741</span>
+      </div>
+      <div class="row">
         <span class="name">nse-derivatives-feed</span>
         <span class="track"><span class="fill" style="width:1.9%"></span><span class="fill docs" style="width:0.1%"></span></span>
         <span class="v">11,214</span>
       </div>
     </div>
     <div class="legend">
-      <span><i class="sw" style="background:var(--bar)"></i> Code &amp; tests — 1,163,395</span>
-      <span><i class="sw" style="background:var(--accent-soft);border:1px solid var(--accent)"></i> Documentation — 283,730</span>
-      <span>Config — 155,632</span>
+      <span><i class="sw" style="background:var(--bar)"></i> Code &amp; tests — 1,171,154</span>
+      <span><i class="sw" style="background:var(--accent-soft);border:1px solid var(--accent)"></i> Documentation — 303,341</span>
+      <span>Config — 156,003</span>
     </div>
   </section>
 
@@ -466,6 +471,24 @@
           <div><span class="mv">69</span><span class="mk">Files</span></div>
           <div><span class="mv">17</span><span class="mk">Tests</span></div>
           <div><span class="mv">3</span><span class="mk">Docs</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div>
+            <h3>Radxa Cubie A5E Case</h3>
+            <div class="repo">radxa-cubie-a5e-case</div>
+          </div>
+          <span class="chip a">Ready</span>
+        </div>
+        <p>A parametric, screwless enclosure for the Radxa Cubie A5E single-board computer. Every dimension was read out of Radxa's official STEP file through OpenCASCADE — 316 solids, exact bounding boxes — rather than measured from photographs. Two printed parts, no fasteners, no supports. Print-verified.</p>
+        <div class="stack">OpenSCAD · OpenCASCADE · manifold3d · STEP B-Rep · CC BY 4.0</div>
+        <div class="metrics">
+          <div><span class="mv">28k</span><span class="mk">Tokens</span></div>
+          <div><span class="mv">10</span><span class="mk">Files</span></div>
+          <div><span class="mv">2</span><span class="mk">Parts</span></div>
+          <div><span class="mv">6</span><span class="mk">Docs</span></div>
         </div>
       </article>
     </div>
@@ -580,9 +603,10 @@
       <h3>Methodology</h3>
       <ul>
         <li><strong>Tokens</strong> are counted with tiktoken <code>cl100k_base</code> across source, test, documentation and configuration files — the same encoding a language model would read them through.</li>
-        <li><strong>Excluded from every count:</strong> dependencies, virtual environments, lockfiles, generated API schemas, minified bundles and build output. What remains is authored code.</li>
+        <li><strong>Excluded from every count:</strong> dependencies, virtual environments, lockfiles, generated API schemas, minified bundles and build output. What remains is authored code. For the CAD project that means the exported STL meshes are excluded — they are build output of the OpenSCAD source, which is what gets counted.</li>
         <li><strong>Tests and documentation</strong> are reported separately from implementation, so each project's real ratio stays visible instead of being averaged away.</li>
-        <li>Each repository carries an <code>INDEX.md</code> written from its own source — architecture, usage, layout, and an explicit section naming what is missing.</li>
+        <li>Each software repository carries an <code>INDEX.md</code> written from its own source — architecture, usage, layout, and an explicit section naming what is missing. The CAD project carries <code>docs/design-notes.md</code> instead: the full measurement table, the coordinate transform, and the validation record.</li>
+        <li><strong>One card reads differently.</strong> The enclosure has no test suite, so its third metric counts printed <em>parts</em> rather than tests. Everything else on this page is software.</li>
       </ul>
     </div>
   </section>
