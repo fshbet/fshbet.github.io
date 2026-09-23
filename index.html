@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Index of eleven projects: AI agents, orchestration, automation frameworks, data platforms, trading infrastructure and a parametric CAD enclosure.">
+<meta name="description" content="Index of twelve projects: AI agents, orchestration, automation frameworks, data platforms, trading infrastructure and a parametric CAD enclosure.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2016%2016%27%3E%3Ctext%20y=%2713%27%20font-size=%2713%27%3E%F0%9F%93%87%3C/text%3E%3C/svg%3E">
 <title>Code Archive — fshbet</title>
 <style>
@@ -168,7 +168,7 @@
   .chart { display: flex; flex-direction: column; gap: 3px; }
   .row {
     display: grid;
-    grid-template-columns: minmax(150px, 200px) 1fr auto;
+    grid-template-columns: minmax(150px, 275px) 1fr auto;
     align-items: center;
     gap: 16px;
     padding: 7px 0;
@@ -309,6 +309,7 @@
   @media (max-width: 620px) {
     .row { grid-template-columns: 1fr auto; }
     .row .track { display: none; }
+    .row .name { white-space: normal; overflow-wrap: anywhere; }
     .stamp { text-align: left; }
     .metrics { grid-template-columns: repeat(2, 1fr); }
   }
@@ -322,24 +323,24 @@
     <div>
       <p class="eyebrow">Project index</p>
       <h1>Code Archive</h1>
-      <p class="lede">Eleven projects — AI agents, orchestration, automation frameworks, data platforms, trading infrastructure, and one parametric CAD enclosure. Each one documented, measured, and honest about what it does and does not yet do.</p>
+      <p class="lede">Twelve projects — AI agents, orchestration, automation frameworks, data platforms, trading infrastructure, and one parametric CAD enclosure. Each one documented, measured, and honest about what it does and does not yet do.</p>
     </div>
     <div class="stamp">
-      Updated <b>29 Aug 2026</b><br>
+      Updated <b>23 Sep 2026</b><br>
       GitHub <b>@fshbet</b><br>
       Languages <b>9</b><br>
-      Repositories <b>11</b>
+      Repositories <b>12</b>
     </div>
   </header>
 
   <div class="totals">
-    <div><span class="n">11</span><span class="k">Repositories</span></div>
-    <div><span class="n">224,369</span><span class="k">Lines of code</span></div>
-    <div><span class="n">1,472</span><span class="k">Source files</span></div>
-    <div><span class="n">2.05M</span><span class="k">Tokens, everything</span></div>
-    <div><span class="n">17.8%</span><span class="k">Of that, documentation</span></div>
+    <div><span class="n">12</span><span class="k">Repositories</span></div>
+    <div><span class="n">239,350</span><span class="k">Lines of code</span></div>
+    <div><span class="n">1,610</span><span class="k">Source files</span></div>
+    <div><span class="n">2.26M</span><span class="k">Tokens, everything</span></div>
+    <div><span class="n">17.2%</span><span class="k">Of that, documentation</span></div>
   </div>
-  <p class="totals-note">That last figure is a share of the one beside it: <b>365,253</b> of the <b>2,049,165</b> tokens are documentation rather than code, tests or config.</p>
+  <p class="totals-note">That last figure is a share of the one beside it: <b>389,076</b> of the <b>2,257,774</b> tokens are documentation rather than code, tests or config.</p>
 
   <section>
     <h2>Token weight</h2>
@@ -365,6 +366,11 @@
         <span class="name">ugaf-development-kit</span>
         <span class="track"><span class="fill" style="width:44.0%"></span><span class="fill docs" style="width:13.4%"></span></span>
         <span class="v">317,541</span>
+      </div>
+      <div class="row">
+        <span class="name">Unified-AI-Data-Intelligence-Platform</span>
+        <span class="track"><span class="fill" style="width:33.4%"></span><span class="fill docs" style="width:4.3%"></span></span>
+        <span class="v">208,609</span>
       </div>
       <div class="row">
         <span class="name">bambu-a1-camera-monitor</span>
@@ -403,9 +409,9 @@
       </div>
     </div>
     <div class="legend">
-      <span><i class="sw" style="background:var(--bar)"></i> Code &amp; tests — 1,512,580</span>
-      <span><i class="sw" style="background:var(--accent-soft);border:1px solid var(--accent)"></i> Documentation — 365,253</span>
-      <span>Config — 171,332</span>
+      <span><i class="sw" style="background:var(--bar)"></i> Code &amp; tests — 1,695,362</span>
+      <span><i class="sw" style="background:var(--accent-soft);border:1px solid var(--accent)"></i> Documentation — 389,076</span>
+      <span>Config — 173,336</span>
     </div>
   </section>
 
@@ -469,6 +475,25 @@
           <div><span class="mv">51</span><span class="mk">Doc files</span></div>
         </div>
         <div class="links"><a href="https://github.com/fshbet/ugaf-development-kit">Repository</a></div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div>
+            <h3>Unified AI Data Intelligence</h3>
+            <div class="repo">Unified-AI-Data-Intelligence-Platform</div>
+          </div>
+          <span class="chip a">Ready</span>
+        </div>
+        <p>An AI analyst for a whole data estate rather than a single database. It builds a semantic layer over everything connected — files, SQL, MongoDB, Redis, REST, and the governed models inside Power BI and Tableau — then investigates across it: isolating what moved a metric, citing a query reference for every figure it prints, and declining to answer where the evidence is not there. A Power BI measure it cannot translate to SQL exactly is kept verbatim and marked uncomputable instead of approximated.</p>
+        <div class="stack">FastAPI · Next.js 16 · DuckDB · SQLAlchemy 2 · pandas · ECharts · Ollama</div>
+        <div class="metrics">
+          <div><span class="mv">209k</span><span class="mk">Tokens</span></div>
+          <div><span class="mv">138</span><span class="mk">Files</span></div>
+          <div><span class="mv">10</span><span class="mk">Tests</span></div>
+          <div><span class="mv">8</span><span class="mk">Doc files</span></div>
+        </div>
+        <div class="links"><a href="https://github.com/fshbet/Unified-AI-Data-Intelligence-Platform">Repository</a></div>
       </article>
 
       <article class="card">
@@ -646,7 +671,7 @@
         <li><strong>Tokens</strong> are counted with tiktoken <code>cl100k_base</code> across source, test, documentation and configuration files — the same encoding a language model would read them through.</li>
         <li><strong>Excluded from every count:</strong> dependencies, virtual environments, lockfiles, generated API schemas, minified bundles and build output. What remains is authored code. For the CAD project that means the exported STL meshes are excluded — they are build output of the OpenSCAD source, which is what gets counted.</li>
         <li><strong>Tests and documentation</strong> are reported separately from implementation, so each project's real ratio stays visible instead of being averaged away.</li>
-        <li><strong>Most</strong> repositories carry an <code>INDEX.md</code> written from their own source — architecture, usage, layout, and an explicit section naming what is missing. Three carry their own documentation set instead: SBC, Sentinel (29 topic guides and 12 architecture decision records), and the CAD project, whose <code>docs/design-notes.md</code> holds the measurement table, the coordinate transform and the validation record.</li>
+        <li><strong>Most</strong> repositories carry an <code>INDEX.md</code> written from their own source — architecture, usage, layout, and an explicit section naming what is missing. Four carry their own documentation set instead: SBC, Sentinel (29 topic guides and 12 architecture decision records), the CAD project, whose <code>docs/design-notes.md</code> holds the measurement table, the coordinate transform and the validation record, and the data-intelligence platform, which ships an architecture reference, an operator guide and a self-contained <code>how-it-works.html</code>.</li>
         <li><strong>One card reads differently.</strong> The enclosure has no test suite, so its third metric counts printed <em>parts</em> rather than tests. Everything else on this page is software.</li>
       </ul>
     </div>
