@@ -323,24 +323,24 @@
     <div>
       <p class="eyebrow">Project index</p>
       <h1>Code Archive</h1>
-      <p class="lede">Twelve projects — AI agents, orchestration, automation frameworks, data platforms, trading infrastructure, and one parametric CAD enclosure. Each one documented, measured, and honest about what it does and does not yet do.</p>
+      <p class="lede">Thirteen projects — AI agents, orchestration, automation frameworks, knowledge and data platforms, trading infrastructure, and one parametric CAD enclosure. Each one documented, measured, and honest about what it does and does not yet do.</p>
     </div>
     <div class="stamp">
-      Updated <b>23 Sep 2026</b><br>
+      Updated <b>24 Sep 2026</b><br>
       GitHub <b>@fshbet</b><br>
       Languages <b>9</b><br>
-      Repositories <b>12</b>
+      Repositories <b>13</b>
     </div>
   </header>
 
   <div class="totals">
-    <div><span class="n">12</span><span class="k">Repositories</span></div>
-    <div><span class="n">239,350</span><span class="k">Lines of code</span></div>
-    <div><span class="n">1,610</span><span class="k">Source files</span></div>
-    <div><span class="n">2.26M</span><span class="k">Tokens, everything</span></div>
-    <div><span class="n">17.2%</span><span class="k">Of that, documentation</span></div>
+    <div><span class="n">13</span><span class="k">Repositories</span></div>
+    <div><span class="n">274,209</span><span class="k">Lines of code</span></div>
+    <div><span class="n">1,833</span><span class="k">Source files</span></div>
+    <div><span class="n">2.64M</span><span class="k">Tokens, everything</span></div>
+    <div><span class="n">17.1%</span><span class="k">Of that, documentation</span></div>
   </div>
-  <p class="totals-note">That last figure is a share of the one beside it: <b>389,076</b> of the <b>2,257,774</b> tokens are documentation rather than code, tests or config.</p>
+  <p class="totals-note">That last figure is a share of the one beside it: <b>451,830</b> of the <b>2,638,612</b> tokens are documentation rather than code, tests or config.</p>
 
   <section>
     <h2>Token weight</h2>
@@ -356,6 +356,11 @@
         <span class="name">sentinel-orchestrator</span>
         <span class="track"><span class="fill" style="width:64.5%"></span><span class="fill docs" style="width:11.2%"></span></span>
         <span class="v">418,667</span>
+      </div>
+      <div class="row">
+        <span class="name">Self-Learning-AI</span>
+        <span class="track"><span class="fill" style="width:56.0%"></span><span class="fill docs" style="width:11.3%"></span></span>
+        <span class="v">380,838</span>
       </div>
       <div class="row">
         <span class="name">ai-freelance-hunter</span>
@@ -409,9 +414,9 @@
       </div>
     </div>
     <div class="legend">
-      <span><i class="sw" style="background:var(--bar)"></i> Code &amp; tests — 1,695,362</span>
-      <span><i class="sw" style="background:var(--accent-soft);border:1px solid var(--accent)"></i> Documentation — 389,076</span>
-      <span>Config — 173,336</span>
+      <span><i class="sw" style="background:var(--bar)"></i> Code &amp; tests — 2,004,894</span>
+      <span><i class="sw" style="background:var(--accent-soft);border:1px solid var(--accent)"></i> Documentation — 451,830</span>
+      <span>Config — 181,888</span>
     </div>
   </section>
 
@@ -563,12 +568,32 @@
       <article class="card">
         <div class="card-top">
           <div>
+            <h3>Self-Learning Knowledge Platform</h3>
+            <div class="repo">Self-Learning-AI</div>
+          </div>
+          <span class="chip b">Gaps noted</span>
+        </div>
+        <p>A knowledge base that maintains itself. It crawls declared sources, extracts claims with verbatim-quote verification, tracks each one through a lifecycle of conflicts, staleness and supersession, and answers questions with citations back to the evidence. Retrieval runs four channels and records why every item ranked where it did; answers are planned deterministically, checked for completeness, and regenerated at most once. The core knows nothing about any subject — Power BI and a synthetic robotics lab are plugins.</p>
+        <div class="stack">Python 3.12 · FastAPI · PostgreSQL + pgvector · Ollama · React · Alembic</div>
+        <div class="metrics">
+          <div><span class="mv">381k</span><span class="mk">Tokens</span></div>
+          <div><span class="mv">223</span><span class="mk">Files</span></div>
+          <div><span class="mv">39</span><span class="mk">Tests</span></div>
+          <div><span class="mv">17</span><span class="mk">Doc files</span></div>
+        </div>
+        <div class="flag">Beta by its own report — 8 of 12 golden questions pass, one concept is missing from the corpus entirely</div>
+        <div class="links"><a href="https://github.com/fshbet/Self-Learning-AI">Repository</a></div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div>
             <h3>AI Freelance Hunter</h3>
             <div class="repo">ai-freelance-hunter</div>
           </div>
           <span class="chip b">Gaps noted</span>
         </div>
-        <p>Crawls ten freelance platforms, deduplicates and scores every posting on feasibility, profitability, competition and risk, then drafts proposals. The largest project here.</p>
+        <p>Crawls ten freelance platforms, deduplicates and scores every posting on feasibility, profitability, competition and risk, then drafts proposals.</p>
         <div class="stack">FastAPI · Next.js 14 · PostgreSQL · Redis · Celery · K8s</div>
         <div class="metrics">
           <div><span class="mv">360k</span><span class="mk">Tokens</span></div>
