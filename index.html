@@ -1,708 +1,2068 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Index of thirteen projects: AI agents, orchestration, automation frameworks, data platforms, trading infrastructure and a parametric CAD enclosure.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2016%2016%27%3E%3Ctext%20y=%2713%27%20font-size=%2713%27%3E%F0%9F%93%87%3C/text%3E%3C/svg%3E">
-<title>Code Archive — fshbet</title>
+<title>fshbet — Engineering Code Archive</title>
+<meta name="description" content="Thirteen engineering projects — AI agents, orchestration, automation frameworks, knowledge and data platforms, trading infrastructure and a parametric CAD enclosure — measured at token level and explicit about what each one does not yet do.">
+<link rel="canonical" href="https://fshbet.github.io/">
+<meta name="author" content="fshbet">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0B0D10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FBFAF8" media="(prefers-color-scheme: light)">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fshbet.github.io/">
+<meta property="og:site_name" content="fshbet — Code Archive">
+<meta property="og:title" content="fshbet — Engineering Code Archive">
+<meta property="og:description" content="Thirteen projects, 2.64M tokens, 1,833 source files. Counted from source, documented end to end, and explicit about known gaps.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="fshbet — Engineering Code Archive">
+<meta name="twitter:description" content="Thirteen projects, 2.64M tokens, 1,833 source files. Counted from source, and explicit about known gaps.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B0D10'/%3E%3Cg fill='none' stroke='%2356C2D6' stroke-width='2'%3E%3Crect x='8' y='8' width='16' height='16'/%3E%3Cpath d='M4 12h4M4 20h4M24 12h4M24 20h4M12 4v4M20 4v4M12 24v4M20 24v4'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"></noscript>
+<script>
+  /* Theme resolution before first paint. Dark-first, system-aware, user override wins. */
+  try {
+    var t = localStorage.getItem('archive-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { /* private mode / blocked storage: fall through to dark-first default */ }
+</script>
 <style>
-  :root {
-    --paper:   #FAF9F6;
-    --surface: #FFFFFF;
-    --sunken:  #F2F0EA;
-    --ink:     #171A1F;
-    --ink-2:   #565C66;
-    --ink-3:   #868C96;
-    --rule:    #E3DFD7;
-    --accent:  #A8552F;
-    --accent-soft: #A8552F1F;
-    --ok:      #2E6F4E;
-    --ok-soft: #2E6F4E1A;
-    --warn:    #8A6512;
-    --warn-soft: #8A65121A;
-    --bar:     #A8552F;
-    --bar-track: #E9E5DC;
+/* ═══════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — dark is the base layer; light is an override.
+   ═══════════════════════════════════════════════════════════════════ */
+:root {
+  /* surfaces */
+  --bg:        #0B0D10;
+  --surface:   #11141A;
+  --surface-2: #171B23;
+  --sunken:    #0E1115;
 
-    --mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace, "SF Mono", Menlo, monospace;
-    --sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --paper:   #131519;
-      --surface: #1A1D23;
-      --sunken:  #202430;
-      --ink:     #ECEAE5;
-      --ink-2:   #A2A9B3;
-      --ink-3:   #737A85;
-      --rule:    #2B2F38;
-      --accent:  #DB8656;
-      --accent-soft: #DB865626;
-      --ok:      #63BC8E;
-      --ok-soft: #63BC8E1F;
-      --warn:    #D4AA51;
-      --warn-soft: #D4AA511F;
-      --bar:     #DB8656;
-      --bar-track: #262A33;
-    }
-  }
-  :root[data-theme="dark"] {
-    --paper:   #131519;
-    --surface: #1A1D23;
-    --sunken:  #202430;
-    --ink:     #ECEAE5;
-    --ink-2:   #A2A9B3;
-    --ink-3:   #737A85;
-    --rule:    #2B2F38;
-    --accent:  #DB8656;
-    --accent-soft: #DB865626;
-    --ok:      #63BC8E;
-    --ok-soft: #63BC8E1F;
-    --warn:    #D4AA51;
-    --warn-soft: #D4AA511F;
-    --bar:     #DB8656;
-    --bar-track: #262A33;
-  }
+  /* ink */
+  --text:   #E8E6E1;
+  --text-2: #A3A9B5;
+  --text-3: #7D8593;
 
-  * { box-sizing: border-box; }
+  /* structure */
+  --line:   #222733;
+  --line-2: #30384A;
+  --grid:   rgba(232,230,225,.035);
 
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.6;
+  /* accent — links, active state, data emphasis. One hue only. */
+  --accent:     #56C2D6;
+  --accent-ink: #06181C;
+  --accent-dim: rgba(86,194,214,.13);
+  --accent-mid: rgba(86,194,214,.34);
+
+  /* status — never the accent, never colour alone */
+  --ok:       #5FB98A;
+  --ok-dim:   rgba(95,185,138,.12);
+  --warn:     #D9A94C;
+  --warn-dim: rgba(217,169,76,.12);
+  --mute:     #8A92A0;
+  --mute-dim: rgba(138,146,160,.12);
+
+  /* type */
+  --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", "SF Mono", Consolas, Menlo, monospace;
+
+  /* space — dense scale */
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px;
+  --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px;
+
+  --r: 2px;
+  --shell: 1200px;
+  --ease: cubic-bezier(.33,.68,.32,1);
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #FBFAF8; --surface: #FFFFFF; --surface-2: #F4F2ED; --sunken: #F7F5F1;
+    --text: #15181D; --text-2: #4E5663; --text-3: #5F6775;
+    --line: #E4E0D8; --line-2: #CBC5B9; --grid: rgba(21,24,29,.045);
+    --accent: #0E6C7D; --accent-ink: #FFFFFF;
+    --accent-dim: rgba(14,108,125,.09); --accent-mid: rgba(14,108,125,.3);
+    --ok: #22684A; --ok-dim: rgba(34,104,74,.09);
+    --warn: #7A5A10; --warn-dim: rgba(122,90,16,.1);
+    --mute: #5F6775; --mute-dim: rgba(95,103,117,.1);
+  }
+}
+:root[data-theme="light"] {
+  --bg: #FBFAF8; --surface: #FFFFFF; --surface-2: #F4F2ED; --sunken: #F7F5F1;
+  --text: #15181D; --text-2: #4E5663; --text-3: #5F6775;
+  --line: #E4E0D8; --line-2: #CBC5B9; --grid: rgba(21,24,29,.045);
+  --accent: #0E6C7D; --accent-ink: #FFFFFF;
+  --accent-dim: rgba(14,108,125,.09); --accent-mid: rgba(14,108,125,.3);
+  --ok: #22684A; --ok-dim: rgba(34,104,74,.09);
+  --warn: #7A5A10; --warn-dim: rgba(122,90,16,.1);
+  --mute: #5F6775; --mute-dim: rgba(95,103,117,.1);
+}
+
+/* ═══ BASE ═══ */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+/* Fine engineering grid, fixed behind everything. Decorative only. */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 120% 70% at 50% 0%, #000 0%, transparent 78%);
+}
+.shell { max-width: var(--shell); margin: 0 auto; padding: 0 var(--s5); position: relative; z-index: 1; }
+img, svg { max-width: 100%; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--r);
+}
+::selection { background: var(--accent-mid); color: var(--text); }
+.skip {
+  position: absolute; left: var(--s4); top: -100px;
+  z-index: 100;
+  background: var(--accent); color: var(--accent-ink);
+  font: 600 13px/1 var(--mono);
+  padding: var(--s3) var(--s4);
+  transition: top .15s var(--ease);
+}
+.skip:focus { top: var(--s4); }
+.vh {
+  position: absolute !important; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+
+/* ═══ TYPE PRIMITIVES ═══ */
+.mono { font-family: var(--mono); font-variant-ligatures: none; }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.label {
+  font: 500 10.5px/1.4 var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+h1, h2, h3, h4 { font-weight: 600; letter-spacing: -.021em; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+code {
+  font-family: var(--mono); font-size: .86em;
+  background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: var(--r); padding: .1em .4em;
+}
+</style>
+<style>
+/* ═══ MASTHEAD / STICKY NAV ═══ */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--bg);
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+@supports not (backdrop-filter: blur(1px)) { .topbar { background: var(--bg); } }
+.topbar-in {
+  max-width: var(--shell); margin: 0 auto;
+  padding: 0 var(--s5);
+  height: 56px;
+  display: flex; align-items: center; gap: var(--s5);
+}
+.brand {
+  display: flex; align-items: center; gap: var(--s3);
+  font: 700 13px/1 var(--mono);
+  letter-spacing: .04em;
+  color: var(--text); text-decoration: none;
+  white-space: nowrap;
+}
+.brand svg { width: 18px; height: 18px; color: var(--accent); flex: none; }
+.brand span { color: var(--text-3); font-weight: 400; }
+.brand:hover span { color: var(--text-2); }
+
+.nav { margin-left: auto; display: flex; align-items: center; gap: var(--s1); }
+.nav a {
+  font: 500 11px/1 var(--mono);
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--text-2); text-decoration: none;
+  padding: var(--s2) var(--s3);
+  border-radius: var(--r);
+  position: relative;
+  transition: color .18s var(--ease), background-color .18s var(--ease);
+}
+.nav a:hover { color: var(--text); background: var(--surface-2); }
+.nav a[aria-current="true"] { color: var(--accent); }
+.nav a[aria-current="true"]::after {
+  content: ""; position: absolute; left: var(--s3); right: var(--s3); bottom: 2px;
+  height: 1px; background: var(--accent);
+}
+.topbar-end { display: flex; align-items: center; gap: var(--s2); margin-left: var(--s3); }
+.gh {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  font: 500 11.5px/1 var(--mono);
+  color: var(--text); text-decoration: none;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r);
+  padding: 7px var(--s3);
+  transition: border-color .18s var(--ease), color .18s var(--ease), background-color .18s var(--ease);
+}
+.gh:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+.gh svg { width: 14px; height: 14px; flex: none; }
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px;
+  background: none; border: 1px solid var(--line-2); border-radius: var(--r);
+  color: var(--text-2); cursor: pointer;
+  transition: color .18s var(--ease), border-color .18s var(--ease);
+}
+.icon-btn:hover { color: var(--text); border-color: var(--line-2); }
+.icon-btn svg { width: 15px; height: 15px; }
+.icon-btn .sun { display: none; }
+:root[data-theme="light"] .icon-btn .sun { display: block; }
+:root[data-theme="light"] .icon-btn .moon { display: none; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .icon-btn .sun { display: block; }
+  :root:not([data-theme="dark"]) .icon-btn .moon { display: none; }
+}
+.burger { display: none; }
+.burger .m-close { display: none; }
+.topbar.open .burger .m-open { display: none; }
+.topbar.open .burger .m-close { display: block; }
+.topbar.open .burger { color: var(--accent); border-color: var(--accent); }
+
+/* ═══ SECTION FRAME ═══ */
+section { position: relative; z-index: 1; }
+section[id], .card[id], #top { scroll-margin-top: 72px; }
+.sec { padding: var(--s8) 0 0; }
+.sec-head {
+  display: flex; align-items: baseline; gap: var(--s4);
+  padding-bottom: var(--s3);
+  border-bottom: 1px solid var(--line-2);
+  margin-bottom: var(--s5);
+  flex-wrap: wrap;
+}
+.sec-no {
+  font: 500 11px/1 var(--mono); letter-spacing: .1em;
+  color: var(--accent); flex: none;
+}
+.sec-head h2 {
+  font: 600 13px/1.2 var(--mono);
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--text);
+}
+.sec-head .hint { margin-left: auto; font: 400 11px/1.4 var(--mono); color: var(--text-3); }
+.sub { color: var(--text-2); font-size: 15px; max-width: 72ch; margin-bottom: var(--s5); }
+.sub a { color: var(--accent); }
+</style>
+<style>
+/* ═══ HERO ═══ */
+.hero { padding: var(--s8) 0 var(--s7); }
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: var(--s9);
+  align-items: start;
+}
+.eyebrow {
+  display: flex; align-items: center; gap: var(--s3);
+  font: 500 11px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--s5);
+}
+.eyebrow::after { content: ""; height: 1px; flex: 1; background: linear-gradient(to right, var(--accent-mid), transparent); }
+.hero h1 {
+  font-family: var(--mono);
+  font-size: clamp(38px, 7.2vw, 76px);
+  font-weight: 700;
+  line-height: .98;
+  letter-spacing: -.045em;
+  margin-bottom: var(--s5);
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-lede { font-size: clamp(17px, 1.7vw, 20px); line-height: 1.52; color: var(--text-2); max-width: 46ch; }
+.hero-lede strong { color: var(--text); font-weight: 500; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s6); }
+.btn {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  min-height: 42px; padding: 0 var(--s4);
+  font: 500 12.5px/1 var(--mono); letter-spacing: .06em;
+  border-radius: var(--r); text-decoration: none; cursor: pointer;
+  border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink);
+  transition: filter .18s var(--ease), transform .18s var(--ease);
+}
+.btn:hover { filter: brightness(1.1); }
+.btn:active { transform: translateY(1px); }
+.btn.ghost { background: none; color: var(--text); border-color: var(--line-2); }
+.btn.ghost:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); filter: none; }
+.btn svg { width: 13px; height: 13px; flex: none; }
+
+/* instrument panel (hero right) */
+.panel { border: 1px solid var(--line); background: var(--surface); }
+.panel-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s3);
+  padding: var(--s3) var(--s4);
+  border-bottom: 1px solid var(--line);
+  background: var(--sunken);
+}
+.panel-bar .label { color: var(--text-2); }
+.panel-bar .tick { font: 400 10.5px/1 var(--mono); color: var(--text-3); }
+.kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); }
+.kpi { background: var(--surface); padding: var(--s4); min-width: 0; }
+.kpi b {
+  display: block;
+  font: 700 clamp(22px, 2.5vw, 30px)/1.05 var(--mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.045em;
+  color: var(--text);
+}
+.kpi .label { margin-top: 6px; display: block; }
+.kpi.wide { grid-column: 1 / -1; }
+.panel-foot { padding: var(--s4); border-top: 1px solid var(--line); }
+.comp-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--s3); gap: var(--s3); }
+.comp {
+  display: flex; height: 10px; width: 100%;
+  border: 1px solid var(--line-2); background: var(--surface-2);
+  overflow: hidden;
+}
+.comp i { height: 100%; display: block; }
+.comp .c-code { background: var(--accent); }
+.comp .c-doc  { background: var(--accent-mid); }
+.comp .c-cfg  { background: var(--line-2); }
+.comp-key { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); margin-top: var(--s3); }
+.comp-key span { display: inline-flex; align-items: center; gap: 7px; font: 400 11px/1.4 var(--mono); color: var(--text-2); }
+.comp-key i { width: 9px; height: 9px; flex: none; border: 1px solid var(--line-2); }
+.comp-key b { color: var(--text); font-weight: 500; font-variant-numeric: tabular-nums; }
+
+/* ═══ GLANCE ═══ */
+.glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.gcell { background: var(--surface); padding: var(--s5) var(--s4); min-width: 0; transition: background-color .2s var(--ease); }
+.gcell:hover { background: var(--surface-2); }
+.gcell b {
+  display: block;
+  font: 700 clamp(26px, 3.4vw, 40px)/1 var(--mono);
+  font-variant-numeric: tabular-nums; letter-spacing: -.05em;
+}
+.gcell .label { display: block; margin-top: var(--s3); }
+.gcell .note { display: block; margin-top: var(--s2); font-size: 12.5px; color: var(--text-2); line-height: 1.45; }
+.meter { height: 3px; background: var(--surface-2); border: 1px solid var(--line); margin-top: var(--s3); }
+.meter i { display: block; height: 100%; background: var(--accent); }
+</style>
+<style>
+/* ═══ TOKEN WEIGHT CHART ═══ */
+.chart { border: 1px solid var(--line); background: var(--surface); }
+.crow {
+  display: grid;
+  grid-template-columns: 26px minmax(130px, 210px) minmax(0, 1fr) 84px 58px;
+  align-items: center;
+  gap: var(--s4);
+  padding: var(--s3) var(--s4);
+  border-bottom: 1px solid var(--line);
+  color: inherit; text-decoration: none;
+  transition: background-color .18s var(--ease);
+}
+.crow:last-child { border-bottom: 0; }
+.crow:hover, .crow:focus-visible { background: var(--surface-2); }
+.crow:hover .cname, .crow:focus-visible .cname { color: var(--accent); }
+.crow .cidx { font: 400 10.5px/1 var(--mono); color: var(--text-3); font-variant-numeric: tabular-nums; }
+.cname {
+  font: 400 12.5px/1.35 var(--mono);
+  color: var(--text-2);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  transition: color .18s var(--ease);
+}
+.ctrack {
+  position: relative;
+  height: 20px;
+  background: var(--sunken);
+  border: 1px solid var(--line);
+  display: flex;
+  min-width: 0;
+}
+.ctrack i { display: block; height: 100%; transition: width .7s var(--ease); }
+.ctrack .b-code { background: var(--accent); }
+.ctrack .b-doc  { background: var(--accent-mid); border-left: 1px solid var(--bg); }
+.crow .cval { font: 500 12.5px/1 var(--mono); font-variant-numeric: tabular-nums; text-align: right; color: var(--text); }
+.crow .cpct { font: 400 11.5px/1 var(--mono); font-variant-numeric: tabular-nums; text-align: right; color: var(--text-3); }
+.crow:hover .cpct, .crow:focus-visible .cpct { color: var(--accent); }
+.chart-foot {
+  display: flex; flex-wrap: wrap; gap: var(--s3) var(--s5);
+  align-items: center; justify-content: space-between;
+  margin-top: var(--s4);
+}
+.alt { font: 400 12px/1.5 var(--mono); color: var(--text-3); }
+.alt summary { cursor: pointer; color: var(--text-2); }
+.alt summary:hover { color: var(--accent); }
+.alt[open] summary { margin-bottom: var(--s4); color: var(--accent); }
+.tscroll { overflow-x: auto; border: 1px solid var(--line); }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 620px; }
+caption { text-align: left; font: 400 12px/1.5 var(--mono); color: var(--text-3); padding: var(--s3) var(--s4); background: var(--sunken); border-bottom: 1px solid var(--line); }
+th, td { text-align: left; padding: 10px var(--s4); border-bottom: 1px solid var(--line); }
+tbody tr:last-child td { border-bottom: 0; }
+th {
+  font: 500 10px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase;
+  color: var(--text-3); background: var(--surface); white-space: nowrap;
+}
+td { color: var(--text-2); }
+td:first-child { color: var(--text); font-family: var(--mono); font-size: 12.5px; }
+td.n, th.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+tbody tr:hover td { background: var(--surface-2); }
+
+/* ═══ FILTER BAR ═══ */
+.filters {
+  border: 1px solid var(--line); background: var(--surface);
+  padding: var(--s4);
+  display: grid; gap: var(--s4);
+  margin-bottom: var(--s5);
+}
+.frow { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); }
+.frow > .label { flex: none; width: 58px; }
+.chipbtn {
+  font: 500 11.5px/1 var(--mono); letter-spacing: .04em;
+  min-height: 30px; padding: 0 11px;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: none; color: var(--text-2);
+  border: 1px solid var(--line-2); border-radius: var(--r);
+  cursor: pointer;
+  transition: color .16s var(--ease), border-color .16s var(--ease), background-color .16s var(--ease);
+}
+.chipbtn:hover { color: var(--text); border-color: var(--text-3); }
+.chipbtn[aria-pressed="true"] {
+  color: var(--accent-ink); background: var(--accent); border-color: var(--accent); font-weight: 700;
+}
+.search { display: flex; align-items: center; gap: var(--s2); flex: 1; min-width: 200px; }
+.search label { flex: none; }
+.search-wrap { position: relative; flex: 1; min-width: 0; display: flex; align-items: center; }
+.search-wrap svg { position: absolute; left: 10px; width: 14px; height: 14px; color: var(--text-3); pointer-events: none; }
+.search input {
+  width: 100%; min-height: 34px;
+  padding: 0 var(--s3) 0 32px;
+  font: 400 13px/1 var(--mono);
+  color: var(--text); background: var(--sunken);
+  border: 1px solid var(--line-2); border-radius: var(--r);
+}
+.search input::placeholder { color: var(--text-3); }
+.search input:focus-visible { border-color: var(--accent); outline-offset: 0; }
+.fstatus { font: 400 12px/1.5 var(--mono); color: var(--text-3); }
+.fstatus b { color: var(--text); font-weight: 500; }
+.noresults { border: 1px dashed var(--line-2); padding: var(--s7) var(--s5); text-align: center; color: var(--text-2); }
+.noresults p { font: 400 14px/1.6 var(--sans); }
+.noresults .label { margin-bottom: var(--s3); }
+</style>
+<style>
+/* ═══ PROJECT GROUPS & CARDS ═══ */
+.group { margin-bottom: var(--s8); }
+.group-head {
+  display: flex; align-items: flex-start; gap: var(--s4);
+  padding-bottom: var(--s4); margin-bottom: var(--s5);
+  border-bottom: 1px solid var(--line-2);
+  flex-wrap: wrap;
+}
+.group-head h3 {
+  font: 700 15px/1.2 var(--mono); letter-spacing: .1em; text-transform: uppercase;
+  display: flex; align-items: center; gap: var(--s3);
+}
+.group-head h3 svg { width: 15px; height: 15px; flex: none; }
+.group-head .gdesc { color: var(--text-2); font-size: 14.5px; max-width: 54ch; }
+.group-head .gcount { margin-left: auto; font: 500 11px/1 var(--mono); letter-spacing: .1em; color: var(--text-3); white-space: nowrap; padding-top: 3px; }
+.group.ok h3 { color: var(--ok); }
+.group.gaps h3 { color: var(--warn); }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(368px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.cards:empty { display: none; }
+.card {
+  background: var(--surface);
+  padding: var(--s5);
+  display: flex; flex-direction: column; gap: var(--s4);
+  position: relative;
+  transition: background-color .22s var(--ease);
+}
+.card::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: transparent; transition: background-color .22s var(--ease);
+}
+.card:hover { background: var(--surface-2); }
+.card:hover::before { background: var(--accent); }
+.card:focus-within::before { background: var(--accent); }
+.card[hidden] { display: none; }
+
+.card-top { display: flex; align-items: flex-start; gap: var(--s4); }
+.glyph {
+  flex: none; width: 46px; height: 46px;
+  border: 1px solid var(--line-2);
+  display: grid; place-items: center;
+  color: var(--text-3);
+  background: var(--sunken);
+  transition: color .22s var(--ease), border-color .22s var(--ease);
+}
+.card:hover .glyph { color: var(--accent); border-color: var(--accent-mid); }
+.glyph svg { width: 24px; height: 24px; }
+.card-id { flex: 1; min-width: 0; }
+.card-id .repo {
+  font: 400 11px/1.4 var(--mono); color: var(--text-3);
+  overflow-wrap: anywhere; display: block; margin-bottom: 5px;
+}
+.card-id h4 { font-size: 18px; line-height: 1.25; }
+.card-idx { font: 400 10.5px/1 var(--mono); color: var(--text-3); flex: none; padding-top: 3px; }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  font: 700 9.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase;
+  padding: 5px 7px; border: 1px solid; border-radius: var(--r);
+  white-space: nowrap; align-self: flex-start;
+}
+.chip svg { width: 10px; height: 10px; flex: none; }
+.chip.s-ok   { color: var(--ok);   background: var(--ok-dim);   border-color: var(--ok); }
+.chip.s-gaps { color: var(--warn); background: var(--warn-dim); border-color: var(--warn); }
+.chip.s-mute { color: var(--mute); background: var(--mute-dim); border-color: var(--mute); }
+
+.card .purpose { font-size: 14.5px; line-height: 1.58; color: var(--text-2); }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.tag {
+  font: 400 10.5px/1 var(--mono); letter-spacing: .02em;
+  color: var(--text-2); background: var(--surface-2);
+  border: 1px solid var(--line); border-radius: var(--r);
+  padding: 5px 7px;
+}
+.card:hover .tag { border-color: var(--line-2); }
+
+.mrow {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s3);
+  padding-top: var(--s4);
+  border-top: 1px solid var(--line);
+  margin-top: auto;
+}
+.mrow div { min-width: 0; }
+.mrow b { display: block; font: 700 15px/1.1 var(--mono); font-variant-numeric: tabular-nums; letter-spacing: -.03em; }
+.mrow b.zero { color: var(--text-3); }
+.mrow .label { display: block; margin-top: 5px; font-size: 9.5px; letter-spacing: .1em; }
+
+.gapflag {
+  display: flex; gap: var(--s3); align-items: flex-start;
+  font-size: 13px; line-height: 1.5;
+  color: var(--text-2);
+  background: var(--warn-dim);
+  border-left: 2px solid var(--warn);
+  padding: var(--s3) var(--s4);
+}
+.gapflag svg { width: 13px; height: 13px; flex: none; color: var(--warn); margin-top: 3px; }
+.gapflag b { color: var(--warn); font-weight: 600; }
+
+.links { display: flex; flex-wrap: wrap; gap: var(--s2); align-items: center; }
+.links a {
+  display: inline-flex; align-items: center; gap: 6px;
+  font: 500 11.5px/1 var(--mono);
+  min-height: 30px; padding: 0 10px;
+  color: var(--text); text-decoration: none;
+  border: 1px solid var(--line-2); border-radius: var(--r);
+  transition: color .16s var(--ease), border-color .16s var(--ease), background-color .16s var(--ease);
+}
+.links a:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+.links a svg { width: 12px; height: 12px; flex: none; }
+.links .none {
+  display: inline-flex; align-items: center; gap: 6px;
+  font: 400 11.5px/1 var(--mono); color: var(--text-3);
+  min-height: 30px; padding: 0 10px;
+  border: 1px dashed var(--line-2); border-radius: var(--r);
+}
+.links .none svg { width: 12px; height: 12px; flex: none; }
+
+/* progressive disclosure */
+.detail { border-top: 1px solid var(--line); margin-top: calc(var(--s2) * -1); }
+.detail > summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; gap: var(--s2);
+  font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase;
+  color: var(--text-3); padding: var(--s4) 0 0;
+  transition: color .16s var(--ease);
+}
+.detail > summary::-webkit-details-marker { display: none; }
+.detail > summary:hover { color: var(--accent); }
+.detail > summary svg { width: 11px; height: 11px; transition: transform .2s var(--ease); }
+.detail[open] > summary { color: var(--accent); }
+.detail[open] > summary svg { transform: rotate(90deg); }
+.detail-body { padding-top: var(--s4); display: grid; gap: var(--s4); }
+.detail-body p { font-size: 14px; line-height: 1.62; color: var(--text-2); }
+.dl { display: grid; grid-template-columns: auto 1fr; gap: var(--s2) var(--s4); margin: 0; font-size: 13px; }
+.dl dt { font: 500 10.5px/1.6 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); white-space: nowrap; }
+.dl dd { margin: 0; color: var(--text); font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.dl dd.wrap { font-family: var(--sans); font-size: 13.5px; color: var(--text-2); }
+</style>
+<style>
+/* ═══ TECHNOLOGY LANDSCAPE ═══ */
+.stacks { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.stackcol { background: var(--surface); padding: var(--s5) var(--s4); }
+.stackcol h3 {
+  font: 500 11px/1.4 var(--mono); letter-spacing: .13em; text-transform: uppercase;
+  color: var(--text-3);
+  padding-bottom: var(--s3); margin-bottom: var(--s4);
+  border-bottom: 1px solid var(--line);
+  display: flex; justify-content: space-between; gap: var(--s3);
+}
+.stackcol h3 span { color: var(--accent); font-weight: 400; }
+.techlist { display: flex; flex-wrap: wrap; gap: 5px; }
+.techlist button {
+  font: 400 11.5px/1 var(--mono);
+  color: var(--text-2); background: var(--surface-2);
+  border: 1px solid var(--line); border-radius: var(--r);
+  min-height: 28px; padding: 0 9px; cursor: pointer;
+  transition: color .16s var(--ease), border-color .16s var(--ease), background-color .16s var(--ease);
+}
+.techlist button:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+
+/* ═══ METHOD PIPELINE ═══ */
+.pipe { list-style: none; padding: 0; margin: 0 0 var(--s5); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.stage { background: var(--surface); padding: var(--s5) var(--s4); position: relative; min-width: 0; }
+.stage .sno { font: 500 10.5px/1 var(--mono); color: var(--accent); letter-spacing: .1em; }
+.stage h3 { font: 700 13px/1.2 var(--mono); letter-spacing: .12em; text-transform: uppercase; margin: var(--s3) 0 var(--s3); }
+.stage p { font-size: 13px; line-height: 1.55; color: var(--text-2); }
+.stage::after {
+  content: ""; position: absolute; right: -7px; top: 50%;
+  width: 12px; height: 12px; transform: translateY(-50%) rotate(45deg);
+  border-top: 1px solid var(--line-2); border-right: 1px solid var(--line-2);
+  background: var(--bg); z-index: 2;
+}
+.stage:last-child::after { display: none; }
+
+.notes { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.note-row { background: var(--surface); padding: var(--s5); display: grid; grid-template-columns: 170px 1fr; gap: var(--s5); }
+.note-row dt { font: 500 11px/1.5 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.note-row dd { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--text-2); }
+.note-row dd strong { color: var(--text); font-weight: 500; }
+
+/* ═══ FOOTER ═══ */
+footer { margin-top: var(--s9); border-top: 1px solid var(--line-2); padding: var(--s7) 0 var(--s7); position: relative; z-index: 1; }
+.foot-grid { display: flex; flex-wrap: wrap; gap: var(--s7); justify-content: space-between; align-items: flex-start; }
+.foot-id { max-width: 46ch; }
+.foot-id .fname { font: 700 20px/1 var(--mono); letter-spacing: -.03em; margin-bottom: var(--s3); }
+.foot-id p { color: var(--text-2); font-size: 14.5px; line-height: 1.6; }
+.foot-links { display: flex; gap: var(--s7); flex-wrap: wrap; }
+.foot-links ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
+.foot-links .label { margin-bottom: var(--s3); display: block; }
+.foot-links a { font: 400 13px/1.6 var(--mono); color: var(--text-2); text-decoration: none; }
+.foot-links a:hover { color: var(--accent); text-decoration: underline; }
+.foot-meta {
+  margin-top: var(--s7); padding-top: var(--s4); border-top: 1px solid var(--line);
+  display: flex; flex-wrap: wrap; gap: var(--s3) var(--s5);
+  font: 400 11.5px/1.6 var(--mono); color: var(--text-3);
+}
+.foot-meta b { color: var(--text-2); font-weight: 500; }
+
+/* ═══ MOTION — reveal, opt-out honoured ═══ */
+.reveal { opacity: 0; transform: translateY(10px); }
+.reveal.in { opacity: 1; transform: none; transition: opacity .42s var(--ease), transform .42s var(--ease); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 1100px) {
+  .hero-grid { grid-template-columns: 1fr; gap: var(--s7); }
+  .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .kpi.wide { grid-column: span 2; }
+  .note-row { grid-template-columns: 1fr; gap: var(--s3); }
+  .pipe { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stage::after { display: none; }
+}
+@media (max-width: 860px) {
+  .shell, .topbar-in { padding: 0 var(--s4); }
+  .nav {
+    position: fixed; inset: 56px 0 auto 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--bg); border-bottom: 1px solid var(--line-2);
+    padding: var(--s2) var(--s4) var(--s4);
     margin: 0;
-    padding: 0 24px 96px;
-    -webkit-font-smoothing: antialiased;
+    display: none;
+    max-height: calc(100dvh - 56px);
+    overflow-y: auto;
   }
-  .wrap { max-width: 1080px; margin: 0 auto; }
-
-  /* ─── masthead ─────────────────────────────── */
-  .masthead {
-    padding: 56px 0 28px;
-    border-bottom: 2px solid var(--ink);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 24px;
-  }
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 10px;
-  }
-  h1 {
-    font-family: var(--mono);
-    font-size: clamp(30px, 5vw, 46px);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    margin: 0;
-    text-wrap: balance;
-  }
-  .lede {
-    color: var(--ink-2);
-    max-width: 60ch;
-    margin: 14px 0 0;
-    font-size: 16.5px;
-  }
-  .stamp {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    line-height: 1.9;
-    color: var(--ink-3);
-    text-align: right;
-    white-space: nowrap;
-  }
-  .stamp b { color: var(--ink-2); font-weight: 600; }
-
-  /* ─── totals ───────────────────────────────── */
-  .totals {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-    margin: 0 0 56px;
-  }
-  .totals div { background: var(--surface); padding: 20px 18px; }
-  .totals .n {
-    font-family: var(--mono);
-    font-size: 27px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    font-variant-numeric: tabular-nums;
-    display: block;
-    line-height: 1.15;
-  }
-  .totals .k {
-    font-family: var(--mono);
-    font-size: 10.5px;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    display: block;
-    margin-top: 7px;
-  }
-
-  h2 {
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--ink);
-    margin: 0 0 6px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--rule);
-  }
-  .sub { color: var(--ink-2); font-size: 15px; margin: 12px 0 26px; max-width: 68ch; }
-  section { margin-bottom: 60px; }
-
-  /* ─── token weight chart ───────────────────── */
-  .chart { display: flex; flex-direction: column; gap: 3px; }
-  .row {
-    display: grid;
-    grid-template-columns: minmax(150px, 275px) 1fr auto;
-    align-items: center;
-    gap: 16px;
-    padding: 7px 0;
-  }
-  .row .name {
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--ink-2);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .track { background: var(--bar-track); height: 22px; display: flex; }
-  .fill { background: var(--bar); height: 100%; flex: 0 0 auto; }
-  .fill.docs { background: var(--accent-soft); border-right: 1px solid var(--accent); }
-  .row .v {
-    font-family: var(--mono);
-    font-size: 12.5px;
-    font-variant-numeric: tabular-nums;
-    color: var(--ink);
-    min-width: 68px;
-    text-align: right;
-  }
-  .legend {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 18px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-3);
-    letter-spacing: 0.05em;
-  }
-  .legend span { display: flex; align-items: center; gap: 7px; }
-  .sw { width: 13px; height: 13px; display: inline-block; }
-
-  /* ─── project cards ────────────────────────── */
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
-  .card { background: var(--surface); padding: 24px 22px; display: flex; flex-direction: column; gap: 13px; }
-  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-  .card h3 { font-family: var(--mono); font-size: 16.5px; font-weight: 700; margin: 0; letter-spacing: -0.01em; line-height: 1.3; }
-  .repo { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); margin-top: 4px; word-break: break-all; }
-  .links { display: flex; flex-wrap: wrap; gap: 6px 16px; font-family: var(--mono); font-size: 11.5px; padding-top: 12px; }
-  .links a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; white-space: nowrap; }
-  .links a:hover { border-bottom-color: var(--accent); }
-  .links a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-  .links .none { color: var(--ink-3); font-style: italic; }
-  .totals-note { font-size: 13.5px; color: var(--ink-3); margin: -44px 0 56px; line-height: 1.6; }
-  .chip {
-    font-family: var(--mono);
-    font-size: 9.5px;
-    letter-spacing: 0.11em;
-    text-transform: uppercase;
-    padding: 4px 8px;
-    white-space: nowrap;
-    font-weight: 700;
-    border: 1px solid;
-  }
-  .chip.a { color: var(--ok); background: var(--ok-soft); border-color: var(--ok); }
-  .chip.b { color: var(--warn); background: var(--warn-soft); border-color: var(--warn); }
-  .card p { margin: 0; font-size: 14.5px; color: var(--ink-2); line-height: 1.55; }
-  .stack { font-family: var(--mono); font-size: 11px; color: var(--ink-3); line-height: 1.7; letter-spacing: 0.02em; }
-  .metrics {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    padding-top: 13px;
-    border-top: 1px solid var(--rule);
-    margin-top: auto;
-  }
-  .metrics div { display: flex; flex-direction: column; gap: 2px; }
-  .metrics .mv { font-family: var(--mono); font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .metrics .mk { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
-  .flag { font-size: 13px; color: var(--warn); display: flex; gap: 8px; align-items: baseline; }
-  .flag::before { content: "▲"; font-size: 8px; position: relative; top: -2px; }
-
-  /* ─── tables / notes ───────────────────────── */
-  .scroll { overflow-x: auto; }
-  table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 560px; }
-  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--rule); }
-  th {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    font-weight: 700;
-    border-bottom: 1px solid var(--ink-3);
-  }
-  td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
-  td code, p code, li code { font-family: var(--mono); font-size: 12.5px; background: var(--sunken); padding: 2px 6px; }
-
-  .callout { border-left: 3px solid var(--accent); background: var(--sunken); padding: 20px 24px; }
-  .callout h3 { font-family: var(--mono); font-size: 14px; margin: 0 0 10px; letter-spacing: 0.02em; }
-  .callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
-  .callout ul { margin: 0; padding-left: 20px; }
-  .callout li { margin-bottom: 7px; color: var(--ink-2); font-size: 14.5px; }
-
-  ol.steps { counter-reset: s; list-style: none; padding: 0; margin: 0; }
-  ol.steps > li {
-    counter-increment: s;
-    display: grid;
-    grid-template-columns: 30px 1fr;
-    gap: 16px;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--rule);
-  }
-  ol.steps > li::before {
-    content: counter(s);
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--accent);
-    padding-top: 2px;
-  }
-  ol.steps strong { display: block; margin-bottom: 4px; }
-  ol.steps p { margin: 0; color: var(--ink-2); font-size: 14.5px; }
-
-  pre {
-    background: var(--sunken);
-    border: 1px solid var(--rule);
-    padding: 15px 18px;
-    overflow-x: auto;
-    font-family: var(--mono);
-    font-size: 12.5px;
-    line-height: 1.75;
-    margin: 14px 0 0;
-  }
-  footer {
-    border-top: 1px solid var(--rule);
-    margin-top: 24px;
-    padding-top: 22px;
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--ink-3);
-    line-height: 1.9;
-  }
-  @media (max-width: 620px) {
-    .row { grid-template-columns: 1fr auto; }
-    .row .track { display: none; }
-    .row .name { white-space: normal; overflow-wrap: anywhere; }
-    .stamp { text-align: left; }
-    .metrics { grid-template-columns: repeat(2, 1fr); }
-  }
+  .topbar.open .nav { display: flex; }
+  .nav a { padding: var(--s4) var(--s2); border-bottom: 1px solid var(--line); font-size: 12px; }
+  .nav a::after { display: none; }
+  .nav a[aria-current="true"] { background: var(--accent-dim); }
+  .burger { display: inline-flex; }
+  .topbar-end { margin-left: auto; }
+  .gh span { display: none; }
+  .cards { grid-template-columns: 1fr; }
+  .crow { grid-template-columns: 22px minmax(0, 1fr) 76px 52px; gap: var(--s3); }
+  .crow .ctrack { display: none; }
+  .glance { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .frow > .label { width: 100%; }
+}
+@media (max-width: 560px) {
+  .sec { padding-top: var(--s7); }
+  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pipe { grid-template-columns: 1fr; }
+  .card { padding: var(--s4); }
+  .mrow { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s4) var(--s3); }
+  .card-top { gap: var(--s3); }
+  .glyph { width: 38px; height: 38px; }
+  .glyph svg { width: 20px; height: 20px; }
+  .foot-grid, .foot-links { gap: var(--s6); }
+  .dl { grid-template-columns: 1fr; gap: 2px var(--s3); }
+  .dl dd { margin-bottom: var(--s2); }
+}
+@media (max-width: 430px) {
+  .brand span { display: none; }
+  .topbar-in { gap: var(--s3); }
+}
+@media (max-width: 400px) {
+  .glance { grid-template-columns: 1fr; }
+  .crow { grid-template-columns: minmax(0, 1fr) 72px; }
+  .crow .cidx, .crow .cpct { display: none; }
+}
+@media print {
+  .topbar, .filters, .burger, .icon-btn, body::before { display: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  body { background: #fff; color: #000; }
+}
 </style>
 </head>
 <body>
 
-<div class="wrap">
+<a class="skip" href="#main">Skip to content</a>
 
-  <header class="masthead">
-    <div>
-      <p class="eyebrow">Project index</p>
-      <h1>Code Archive</h1>
-      <p class="lede">Thirteen projects — AI agents, orchestration, automation frameworks, knowledge and data platforms, trading infrastructure, and one parametric CAD enclosure. Each one documented, measured, and honest about what it does and does not yet do.</p>
-    </div>
-    <div class="stamp">
-      Updated <b>4 Oct 2026</b><br>
-      GitHub <b>@fshbet</b><br>
-      Languages <b>9</b><br>
-      Repositories <b>13</b>
-    </div>
-  </header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="i-mark" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="16" height="16"/><path d="M4 12h4M4 20h4M24 12h4M24 20h4M12 4v4M20 4v4M12 24v4M20 24v4"/></g>
+  </defs>
+  <symbol id="i-gh" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.34c-2.23.49-2.7-1.07-2.7-1.07-.36-.93-.89-1.18-.89-1.18-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.71 1.23 1.87.88 2.33.67.07-.52.28-.88.51-1.08-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></symbol>
+  <symbol id="i-down" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M8 3v9M4.5 8.5 8 12l3.5-3.5"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="m6 3 5 5-5 5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="m2.5 8.5 3.5 3.5 7.5-8"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M8 2 15 14H1L8 2ZM8 6.5v3.5M8 12h.01"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="10" height="7"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M13.5 10.2A6 6 0 0 1 5.8 2.5a6 6 0 1 0 7.7 7.7Z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="3.2"/><path d="M8 .8v2M8 13.2v2M.8 8h2M13.2 8h2M2.9 2.9l1.4 1.4M11.7 11.7l1.4 1.4M13.1 2.9l-1.4 1.4M4.3 11.7l-1.4 1.4"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M2 4h12M2 8h12M2 12h12"/></symbol>
+  <symbol id="i-close" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="m3.5 3.5 9 9M12.5 3.5l-9 9"/></symbol>
+</svg>
 
-  <div class="totals">
-    <div><span class="n">13</span><span class="k">Repositories</span></div>
-    <div><span class="n">274,209</span><span class="k">Lines of code</span></div>
-    <div><span class="n">1,833</span><span class="k">Source files</span></div>
-    <div><span class="n">2.64M</span><span class="k">Tokens, everything</span></div>
-    <div><span class="n">17.1%</span><span class="k">Of that, documentation</span></div>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#i-mark"/></svg>
+      fshbet&nbsp;<span>/ code archive</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="#archive">Archive</a>
+      <a href="#weight">Weight</a>
+      <a href="#projects">Projects</a>
+      <a href="#stack">Stack</a>
+      <a href="#method">Method</a>
+    </nav>
+
+    <div class="topbar-end">
+      <a class="gh" href="https://github.com/fshbet" rel="noopener">
+        <svg aria-hidden="true"><use href="#i-gh"/></svg><span>@fshbet</span>
+      </a>
+      <button class="icon-btn" id="theme" type="button" aria-pressed="false">
+        <svg class="moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        <svg class="sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <span class="vh">Switch to light theme</span>
+      </button>
+      <button class="icon-btn burger" id="burger" type="button" aria-expanded="false" aria-controls="nav">
+        <svg class="m-open" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="m-close" aria-hidden="true"><use href="#i-close"/></svg>
+        <span class="vh">Open section menu</span>
+      </button>
+    </div>
   </div>
-  <p class="totals-note">That last figure is a share of the one beside it: <b>451,830</b> of the <b>2,638,612</b> tokens are documentation rather than code, tests or config.</p>
+</header>
 
-  <section>
-    <h2>Token weight</h2>
-    <p class="sub">Measured with <code>cl100k_base</code> across source, tests, docs, and config — excluding dependencies, virtualenvs, and build output. Solid bar is code and tests; the lighter segment is documentation.</p>
-    <div class="chart">
+<main id="main">
+<a id="top"></a>
 
-      <div class="row">
-        <span class="name">SBC</span>
-        <span class="track"><span class="fill" style="width:80.1%"></span><span class="fill docs" style="width:19.9%"></span></span>
-        <span class="v">553,001</span>
+<div class="shell">
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Index &middot; rev 2026.10.04</p>
+        <h1 id="hero-h">Code<br>Archive<em>.</em></h1>
+        <p class="hero-lede">
+          Thirteen engineering systems — <strong>AI agents, orchestration, automation
+          frameworks, knowledge and data platforms, trading infrastructure</strong> and one
+          parametric CAD enclosure. Every figure below is counted from source. Every project
+          states what it does not yet do.
+        </p>
+        <div class="hero-cta">
+          <a class="btn" href="#projects">Browse the archive <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn ghost" href="#method">How it is measured <svg aria-hidden="true"><use href="#i-down"/></svg></a>
+        </div>
       </div>
-      <div class="row">
-        <span class="name">sentinel-orchestrator</span>
-        <span class="track"><span class="fill" style="width:64.5%"></span><span class="fill docs" style="width:11.2%"></span></span>
-        <span class="v">418,667</span>
+
+      <div class="panel">
+        <div class="panel-bar">
+          <span class="label">Archive totals</span>
+          <span class="tick">cl100k_base</span>
+        </div>
+        <div class="kpis">
+          <div class="kpi"><b class="num" data-to="13">13</b><span class="label">Repositories</span></div>
+          <div class="kpi"><b class="num" data-to="9">9</b><span class="label">Languages</span></div>
+          <div class="kpi"><b class="num" data-to="1833">1,833</b><span class="label">Source files</span></div>
+          <div class="kpi"><b class="num" data-to="274209">274,209</b><span class="label">Lines of code</span></div>
+          <div class="kpi wide"><b class="num">2,638,612</b><span class="label">Tokens, everything counted</span></div>
+        </div>
+        <div class="panel-foot">
+          <div class="comp-head">
+            <span class="label">Token composition</span>
+            <span class="tick">100%</span>
+          </div>
+          <div class="comp" role="img" aria-label="Token composition: code and tests 76.0 percent, documentation 17.1 percent, configuration 6.9 percent.">
+            <i class="c-code" style="width:75.98%"></i><i class="c-doc" style="width:17.12%"></i><i class="c-cfg" style="width:6.90%"></i>
+          </div>
+          <div class="comp-key">
+            <span><i class="c-code" style="background:var(--accent)"></i>Code &amp; tests <b>2,004,894</b></span>
+            <span><i class="c-doc" style="background:var(--accent-mid)"></i>Docs <b>451,830</b></span>
+            <span><i class="c-cfg" style="background:var(--line-2)"></i>Config <b>181,888</b></span>
+          </div>
+        </div>
       </div>
-      <div class="row">
-        <span class="name">Self-Learning-AI</span>
-        <span class="track"><span class="fill" style="width:56.0%"></span><span class="fill docs" style="width:11.3%"></span></span>
-        <span class="v">380,838</span>
-      </div>
-      <div class="row">
-        <span class="name">ai-freelance-hunter</span>
-        <span class="track"><span class="fill" style="width:62.1%"></span><span class="fill docs" style="width:3.0%"></span></span>
-        <span class="v">360,393</span>
-      </div>
-      <div class="row">
-        <span class="name">ugaf-development-kit</span>
-        <span class="track"><span class="fill" style="width:44.0%"></span><span class="fill docs" style="width:13.4%"></span></span>
-        <span class="v">317,541</span>
-      </div>
-      <div class="row">
-        <span class="name">Unified-AI-Data-Intelligence-Platform</span>
-        <span class="track"><span class="fill" style="width:33.4%"></span><span class="fill docs" style="width:4.3%"></span></span>
-        <span class="v">208,609</span>
-      </div>
-      <div class="row">
-        <span class="name">bambu-a1-camera-monitor</span>
-        <span class="track"><span class="fill" style="width:8.1%"></span><span class="fill docs" style="width:9.7%"></span></span>
-        <span class="v">98,697</span>
-      </div>
-      <div class="row">
-        <span class="name">gameagent-uagip</span>
-        <span class="track"><span class="fill" style="width:14.5%"></span><span class="fill docs" style="width:2.8%"></span></span>
-        <span class="v">95,728</span>
-      </div>
-      <div class="row">
-        <span class="name">ai-lean-six-sigma-analyst</span>
-        <span class="track"><span class="fill" style="width:13.7%"></span><span class="fill docs" style="width:0.8%"></span></span>
-        <span class="v">80,516</span>
-      </div>
-      <div class="row">
-        <span class="name">ai-dashboard-platform</span>
-        <span class="track"><span class="fill" style="width:8.8%"></span><span class="fill docs" style="width:1.3%"></span></span>
-        <span class="v">56,167</span>
-      </div>
-      <div class="row">
-        <span class="name">daagent-dashboard</span>
-        <span class="track"><span class="fill" style="width:5.2%"></span><span class="fill docs" style="width:0.2%"></span></span>
-        <span class="v">29,500</span>
-      </div>
-      <div class="row">
-        <span class="name">radxa-cubie-a5e-case</span>
-        <span class="track"><span class="fill" style="width:1.5%"></span><span class="fill docs" style="width:3.5%"></span></span>
-        <span class="v">27,741</span>
-      </div>
-      <div class="row">
-        <span class="name">nse-derivatives-feed</span>
-        <span class="track"><span class="fill" style="width:1.9%"></span><span class="fill docs" style="width:0.1%"></span></span>
-        <span class="v">11,214</span>
-      </div>
-    </div>
-    <div class="legend">
-      <span><i class="sw" style="background:var(--bar)"></i> Code &amp; tests — 2,004,894</span>
-      <span><i class="sw" style="background:var(--accent-soft);border:1px solid var(--accent)"></i> Documentation — 451,830</span>
-      <span>Config — 181,888</span>
     </div>
   </section>
 
-  <section>
-    <h2>Complete</h2>
-    <p class="sub">Documented end to end, tested, and running. Each carries a written record of its own architecture — an <code>INDEX.md</code>, a docs set, or design notes.</p>
-    <div class="grid">
-
-      <article class="card">
-        <div class="card-top">
-          <div>
-            <h3>SBC Knowledge Platform</h3>
-            <div class="repo">SBC</div>
-          </div>
-          <span class="chip a">Ready</span>
-        </div>
-        <p>An AI research platform that continuously discovers, validates, enriches and publishes information about single-board computers. India-first, then global — not a price-comparison site. The largest project here.</p>
-        <div class="stack">TypeScript monorepo · Hono · React · libSQL/Turso · pdfjs</div>
-        <div class="metrics">
-          <div><span class="mv">553k</span><span class="mk">Tokens</span></div>
-          <div><span class="mv">229</span><span class="mk">Files</span></div>
-          <div><span class="mv">4</span><span class="mk">Tests</span></div>
-          <div><span class="mv">52</span><span class="mk">Doc files</span></div>
-        </div>
-        <div class="links"><a href="https://github.com/fshbet/SBC">Repository</a></div>
-      </article>
-
-      <article class="card">
-        <div class="card-top">
-          <div>
-            <h3>Sentinel Orchestrator</h3>
-            <div class="repo">sentinel-orchestrator</div>
-          </div>
-          <span class="chip a">Ready</span>
-        </div>
-        <p>A domain-agnostic, MCP-first orchestration engine. Describe the objective, not the workflow — it decomposes the work, picks the capabilities, runs what it can in parallel, validates results and decides what to do on failure. No shipped agent roles, no hard-coded provider. 811 tests, with the multi-replica controls verified against a running Compose stack rather than only in unit tests.</p>
-        <div class="stack">Python · FastAPI · Pydantic · Typer · PostgreSQL · MCP · Apache-2.0</div>
-        <div class="metrics">
-          <div><span class="mv">419k</span><span class="mk">Tokens</span></div>
-          <div><span class="mv">219</span><span class="mk">Files</span></div>
-          <div><span class="mv">32</span><span class="mk">Tests</span></div>
-          <div><span class="mv">55</span><span class="mk">Doc files</span></div>
-        </div>
-        <div class="links"><a href="https://github.com/fshbet/sentinel-orchestrator">Repository</a></div>
-      </article>
-
-      <article class="card">
-        <div class="card-top">
-          <div>
-            <h3>UGAF</h3>
-            <div class="repo">ugaf-development-kit</div>
-          </div>
-          <span class="chip a">Ready</span>
-        </div>
-        <p>Plugin-based automation framework for Android games and apps, driven from the desktop. Web control panel handles device detection, live screen, tap/swipe, and emulator management with no code required.</p>
-        <div class="stack">Python 3.13 · FastAPI · ADB · OpenCV · structlog</div>
-        <div class="metrics">
-          <div><span class="mv">317k</span><span class="mk">Tokens</span></div>
-          <div><span class="mv">272</span><span class="mk">Files</span></div>
-          <div><span class="mv">81</span><span class="mk">Tests</span></div>
-          <div><span class="mv">51</span><span class="mk">Doc files</span></div>
-        </div>
-        <div class="links"><a href="https://github.com/fshbet/ugaf-development-kit">Repository</a></div>
-      </article>
-
-      <article class="card">
-        <div class="card-top">
-          <div>
-            <h3>Unified AI Data Intelligence</h3>
-            <div class="repo">Unified-AI-Data-Intelligence-Platform</div>
-          </div>
-          <span class="chip a">Ready</span>
-        </div>
-        <p>An AI analyst for a whole data estate rather than a single database. It builds a semantic layer over everything connected — files, SQL, MongoDB, Redis, REST, and the governed models inside Power BI and Tableau — then investigates across it: isolating what moved a metric, citing a query reference for every figure it prints, and declining to answer where the evidence is not there. A Power BI measure it cannot translate to SQL exactly is kept verbatim and marked uncomputable instead of approximated.</p>
-        <div class="stack">FastAPI · Next.js 16 · DuckDB · SQLAlchemy 2 · pandas · ECharts · Ollama</div>
-        <div class="metrics">
-          <div><span class="mv">209k</span><span class="mk">Tokens</span></div>
-          <div><span class="mv">138</span><span class="mk">Files</span></div>
-          <div><span class="mv">10</span><span class="mk">Tests</span></div>
-          <div><span class="mv">8</span><span class="mk">Doc files</span></div>
-        </div>
-        <div class="links"><a href="https://github.com/fshbet/Unified-AI-Data-Intelligence-Platform">Repository</a></div>
-      </article>
-
-      <article class="card">
-        <div class="card-top">
-          <div>
-            <h3>Bambu A1 Camera Monitor</h3>
-            <div class="repo">bambu-a1-camera-monitor</div>
-          </div>
-          <span class="chip a">Ready</span>
-        </div>
-        <p>Live streaming, snapshots, and timelapse capture for a Bambu A1 3D printer, running on a Raspberry Pi Zero 2 W with an OV5647 camera. Ships as a systemd service.</p>
-        <div class="stack">Python · Flask · picamera2 · libcamera · FFmpeg</div>
-        <div class="metrics">
-          <div><span class="mv">99k</span><span class="mk">Tokens</span></div>
-          <div><span class="mv">48</span><span class="mk">Files</span></div>
-          <div><span class="mv">3</span><span class="mk">Tests</span></div>
-          <div><span class="mv">28</span><span class="mk">Doc files</span></div>
-        </div>
-        <div class="links"><span class="none">Not public</span></div>
-      </article>
-
-      <article class="card">
-        <div class="card-top">
-          <div>
-            <h3>AI Lean Six Sigma Analyst</h3>
-            <div class="repo">ai-lean-six-sigma-analyst</div>
-          </div>
-          <span class="chip a">Ready</span>
-        </div>
-        <p>Upload a dataset, get DMAIC-structured root-cause analysis. Python computes every statistic; the model only interprets structured evidence — and the app still works with the LLM switched off.</p>
-        <div class="stack">Streamlit · pandas · SciPy · statsmodels · Plotly</div>
-        <div class="metrics">
-          <div><span class="mv">81k</span><span class="mk">Tokens</span></div>
-          <div><span class="mv">69</span><span class="mk">Files</span></div>
-          <div><span class="mv">17</span><span class="mk">Tests</span></div>
-          <div><span class="mv">3</span><span class="mk">Doc files</span></div>
-        </div>
-        <div class="links"><a href="https://github.com/fshbet/ai-lean-six-sigma-analyst">Repository</a></div>
-      </article>
-
-      <article class="card">
-        <div class="card-top">
-          <div>
-            <h3>Radxa Cubie A5E Case</h3>
-            <div class="repo">radxa-cubie-a5e-case</div>
-          </div>
-          <span class="chip a">Ready</span>
-        </div>
-        <p>A parametric, screwless enclosure for the Radxa Cubie A5E single-board computer. Every dimension was read out of Radxa's official STEP file through OpenCASCADE — 316 solids, exact bounding boxes — rather than measured from photographs. Two printed parts, no fasteners, no supports. Print-verified.</p>
-        <div class="stack">OpenSCAD · OpenCASCADE · manifold3d · STEP B-Rep · CC BY 4.0</div>
-        <div class="metrics">
-          <div><span class="mv">28k</span><span class="mk">Tokens</span></div>
-          <div><span class="mv">10</span><span class="mk">Files</span></div>
-          <div><span class="mv">2</span><span class="mk">Parts</span></div>
-          <div><span class="mv">6</span><span class="mk">Doc files</span></div>
-        </div>
-        <div class="links"><a href="https://github.com/fshbet/radxa-cubie-a5e-case">Repository</a><a href="https://fshbet.github.io/radxa-cubie-a5e-case/">Guide</a><a href="https://makerworld.com/en/models/3226207-radxa-cubie-a5e-case-screwless-parametric">MakerWorld</a><a href="https://www.thingiverse.com/thing:7401482">Thingiverse</a></div>
-      </article>
+  <section class="sec" id="archive" aria-labelledby="h-archive">
+    <div class="sec-head">
+      <span class="sec-no">§01</span>
+      <h2 id="h-archive">Archive at a glance</h2>
+      <span class="hint">counted, not estimated</span>
+    </div>
+    <div class="glance reveal">
+      <div class="gcell">
+        <b class="num" data-to="13">13</b>
+        <span class="label">Repositories</span>
+        <span class="note">Seven complete, six working with stated gaps.</span>
+      </div>
+      <div class="gcell">
+        <b class="num" data-to="274209">274,209</b>
+        <span class="label">Lines of code</span>
+        <span class="note">Authored lines, dependencies excluded.</span>
+      </div>
+      <div class="gcell">
+        <b class="num" data-to="1833">1,833</b>
+        <span class="label">Source files</span>
+        <span class="note">Source, test, documentation and config files.</span>
+      </div>
+      <div class="gcell">
+        <b>2.64M</b>
+        <span class="label">Tokens</span>
+        <span class="note">2,638,612 exactly, under <code>cl100k_base</code>.</span>
+      </div>
+      <div class="gcell">
+        <b class="num" data-to="451830">451,830</b>
+        <span class="label">Documentation tokens</span>
+        <span class="note">Written prose about the code, not the code.</span>
+      </div>
+      <div class="gcell">
+        <b>17.1<span style="font-size:.6em">%</span></b>
+        <span class="label">Documentation share</span>
+        <div class="meter" role="img" aria-label="Documentation is 17.1 percent of all tokens."><i style="width:17.1%"></i></div>
+        <span class="note">451,830 of 2,638,612 tokens.</span>
+      </div>
     </div>
   </section>
 
-  <section>
-    <h2>Working, with known gaps</h2>
-    <p class="sub">Functional and worth reading, but not finished. Each <code>INDEX.md</code> states its gaps plainly rather than papering over them.</p>
-    <div class="grid">
+  <section class="sec" id="weight" aria-labelledby="h-weight">
+    <div class="sec-head">
+      <span class="sec-no">§02</span>
+      <h2 id="h-weight">Token weight</h2>
+      <span class="hint">13 repositories, ranked</span>
+    </div>
+    <p class="sub">
+      Bar length is the repository's share of the largest one. The solid segment is code, tests and
+      configuration; the lighter segment is documentation. Hover or focus a row for its share of the
+      whole archive — or open the table underneath, which carries the same figures as text.
+    </p>
 
-      <article class="card">
-        <div class="card-top">
-          <div>
-            <h3>Self-Learning AI</h3>
-            <div class="repo">Self-Learning-AI</div>
-          </div>
-          <span class="chip b">Gaps noted</span>
-        </div>
-        <p>A knowledge base that maintains itself. It crawls declared sources, extracts claims with verbatim-quote verification, tracks each one through a lifecycle of conflicts, staleness and supersession, and answers questions with citations back to the evidence. Retrieval runs four channels and records why every item ranked where it did; answers are planned deterministically, checked for completeness, and regenerated at most once. The core knows nothing about any subject — Power BI and a synthetic robotics lab are plugins.</p>
-        <div class="stack">Python 3.12 · FastAPI · PostgreSQL + pgvector · Ollama · React · Alembic</div>
-        <div class="metrics">
-          <div><span class="mv">381k</span><span class="mk">Tokens</span></div>
-          <div><span class="mv">223</span><span class="mk">Files</span></div>
-          <div><span class="mv">39</span><span class="mk">Tests</span></div>
-          <div><span class="mv">17</span><span class="mk">Doc files</span></div>
-        </div>
-        <div class="flag">Beta by its own report — 8 of 12 golden questions pass, one concept is missing from the corpus entirely</div>
-        <div class="links"><a href="https://github.com/fshbet/Self-Learning-AI">Repository</a></div>
-      </article>
+    <div class="chart reveal">
+      <a class="crow" href="#p-sbc">
+        <span class="cidx">01</span>
+        <span class="cname">SBC</span>
+        <span class="ctrack" aria-hidden="true"><i class="b-code" data-w="80.10" style="width:0"></i><i class="b-doc" data-w="19.90" style="width:0"></i></span>
+        <span class="cval">553,001</span>
+        <span class="cpct">20.96%</span>
+        <span class="vh">SBC Knowledge Platform, documentation 20 percent</span>
+      </a>
+      <a class="crow" href="#p-sentinel">
+        <span class="cidx">02</span>
+        <span class="cname">sentinel-orchestrator</span>
+        <span class="ctrack" aria-hidden="true"><i class="b-code" data-w="64.51" style="width:0"></i><i class="b-doc" data-w="11.20" style="width:0"></i></span>
+        <span class="cval">418,667</span>
+        <span class="cpct">15.87%</span>
+        <span class="vh">Sentinel Orchestrator, documentation 15 percent</span>
+      </a>
+      <a class="crow" href="#p-self-learning">
+        <span class="cidx">03</span>
+        <span class="cname">Self-Learning-AI</span>
+        <span class="ctrack" aria-hidden="true"><i class="b-code" data-w="57.57" style="width:0"></i><i class="b-doc" data-w="11.30" style="width:0"></i></span>
+        <span class="cval">380,838</span>
+        <span class="cpct">14.43%</span>
+        <span class="vh">Self-Learning AI, documentation 16 percent</span>
+      </a>
+      <a class="crow" href="#p-freelance">
+        <span class="cidx">04</span>
+        <span class="cname">ai-freelance-hunter</span>
+        <span class="ctrack" aria-hidden="true"><i class="b-code" data-w="62.17" style="width:0"></i><i class="b-doc" data-w="3.00" style="width:0"></i></span>
+        <span class="cval">360,393</span>
+        <span class="cpct">13.66%</span>
+        <span class="vh">AI Freelance Hunter, documentation 5 percent</span>
+      </a>
+      <a class="crow" href="#p-ugaf">
+        <span class="cidx">05</span>
+        <span class="cname">ugaf-development-kit</span>
+        <span class="ctrack" aria-hidden="true"><i class="b-code" data-w="44.02" style="width:0"></i><i class="b-doc" data-w="13.40" style="width:0"></i></span>
+        <span class="cval">317,541</span>
+        <span class="cpct">12.03%</span>
+        <span class="vh">UGAF, documentation 23 percent</span>
+      </a>
+      <a class="crow" href="#p-unified">
+        <span class="cidx">06</span>
+        <span class="cname">Unified-AI-Data-Intelligence-Platform</span>
+        <span class="ctrack" aria-hidden="true"><i class="b-code" data-w="33.42" style="width:0"></i><i class="b-doc" data-w="4.30" style="width:0"></i></span>
+        <span class="cval">208,609</span>
+        <span class="cpct">7.91%</span>
+        <span class="vh">Unified AI Data Intelligence, documentation 11 percent</span>
+      </a>
+      <a class="crow" href="#p-bambu">
+        <span class="cidx">07</span>
+        <span class="cname">bambu-a1-camera-monitor</span>
+        <span class="ctrack" aria-hidden="true"><i class="b-code" data-w="8.15" style="width:0"></i><i class="b-doc" data-w="9.70" style="width:0"></i></span>
+        <span class="cval">98,697</span>
+        <span class="cpct">3.74%</span>
+        <span class="vh">Bambu A1 Camera Monitor, documentation 54 percent</span>
+      </a>
+      <a class="crow" href="#p-gameagent">
+        <span class="cidx">08</span>
+        <span class="cname">gameagent-uagip</span>
+        <span class="ctrack" aria-hidden="true"><i class="b-code" data-w="14.51" style="width:0"></i><i class="b-doc" data-w="2.80" style="width:0"></i></span>
+        <span class="cval">95,728</span>
+        <span class="cpct">3.63%</span>
+        <span class="vh">UAGIP GameAgent, documentation 16 percent</span>
+      </a>
+      <a class="crow" href="#p-lss">
+        <span class="cidx">09</span>
+        <span class="cname">ai-lean-six-sigma-analyst</span>
+        <span class="ctrack" aria-hidden="true"><i class="b-code" data-w="13.76" style="width:0"></i><i class="b-doc" data-w="0.80" style="width:0"></i></span>
+        <span class="cval">80,516</span>
+        <span class="cpct">3.05%</span>
+        <span class="vh">AI Lean Six Sigma Analyst, documentation 5 percent</span>
+      </a>
+      <a class="crow" href="#p-aidash">
+        <span class="cidx">10</span>
+        <span class="cname">ai-dashboard-platform</span>
+        <span class="ctrack" aria-hidden="true"><i class="b-code" data-w="8.86" style="width:0"></i><i class="b-doc" data-w="1.30" style="width:0"></i></span>
+        <span class="cval">56,167</span>
+        <span class="cpct">2.13%</span>
+        <span class="vh">AI Dashboard Platform, documentation 13 percent</span>
+      </a>
+      <a class="crow" href="#p-daagent">
+        <span class="cidx">11</span>
+        <span class="cname">daagent-dashboard</span>
+        <span class="ctrack" aria-hidden="true"><i class="b-code" data-w="5.13" style="width:0"></i><i class="b-doc" data-w="0.20" style="width:0"></i></span>
+        <span class="cval">29,500</span>
+        <span class="cpct">1.12%</span>
+        <span class="vh">DAAgent, documentation 4 percent</span>
+      </a>
+      <a class="crow" href="#p-radxa">
+        <span class="cidx">12</span>
+        <span class="cname">radxa-cubie-a5e-case</span>
+        <span class="ctrack" aria-hidden="true"><i class="b-code" data-w="1.52" style="width:0"></i><i class="b-doc" data-w="3.50" style="width:0"></i></span>
+        <span class="cval">27,741</span>
+        <span class="cpct">1.05%</span>
+        <span class="vh">Radxa Cubie A5E Case, documentation 70 percent</span>
+      </a>
+      <a class="crow" href="#p-nse">
+        <span class="cidx">13</span>
+        <span class="cname">nse-derivatives-feed</span>
+        <span class="ctrack" aria-hidden="true"><i class="b-code" data-w="1.93" style="width:0"></i><i class="b-doc" data-w="0.10" style="width:0"></i></span>
+        <span class="cval">11,214</span>
+        <span class="cpct">0.43%</span>
+        <span class="vh">NSE Derivatives Feed, documentation 5 percent</span>
+      </a>
+    </div>
 
-      <article class="card">
-        <div class="card-top">
-          <div>
-            <h3>AI Freelance Hunter</h3>
-            <div class="repo">ai-freelance-hunter</div>
-          </div>
-          <span class="chip b">Gaps noted</span>
-        </div>
-        <p>Crawls ten freelance platforms, deduplicates and scores every posting on feasibility, profitability, competition and risk, then drafts proposals.</p>
-        <div class="stack">FastAPI · Next.js 14 · PostgreSQL · Redis · Celery · K8s</div>
-        <div class="metrics">
-          <div><span class="mv">360k</span><span class="mk">Tokens</span></div>
-          <div><span class="mv">368</span><span class="mk">Files</span></div>
-          <div><span class="mv">54</span><span class="mk">Tests</span></div>
-          <div><span class="mv">9</span><span class="mk">Doc files</span></div>
-        </div>
-        <div class="flag">No README — INDEX.md now serves as the front door</div>
-        <div class="links"><a href="https://github.com/fshbet/ai-freelance-hunter">Repository</a></div>
-      </article>
+    <div class="chart-foot">
+      <div class="comp-key">
+        <span><i style="background:var(--accent)"></i>Code, tests &amp; config</span>
+        <span><i style="background:var(--accent-mid)"></i>Documentation</span>
+      </div>
+      <p class="alt" style="margin-left:auto">Full bar width = the largest repository (SBC, 553,001 tokens)</p>
+    </div>
 
-      <article class="card">
-        <div class="card-top">
-          <div>
-            <h3>UAGIP GameAgent</h3>
-            <div class="repo">gameagent-uagip</div>
-          </div>
-          <span class="chip b">Gaps noted</span>
-        </div>
-        <p>Autonomous game-playing agents: capture, vision, state, decision, action, memory. Foundation, capture engine, ADB adapter, vision layer and dataset platform all shipped through tag v0.6.</p>
-        <div class="stack">Python · OpenCV · EasyOCR · YOLO · LangChain · Ollama</div>
-        <div class="metrics">
-          <div><span class="mv">96k</span><span class="mk">Tokens</span></div>
-          <div><span class="mv">148</span><span class="mk">Files</span></div>
-          <div><span class="mv">14</span><span class="mk">Tests</span></div>
-          <div><span class="mv">65</span><span class="mk">Doc files</span></div>
-        </div>
-        <div class="flag">MODULE_STATUS.md is stale — understates real progress</div>
-        <div class="links"><a href="https://github.com/fshbet/gameagent-uagip">Repository</a></div>
-      </article>
+    <details class="alt" style="margin-top:24px">
+      <summary>View the same data as a table</summary>
+      <div class="tscroll">
+        <table>
+          <caption>Token weight by repository, ranked. Documentation share is a repository's documentation tokens as a percentage of its own total, derived from the same measurement.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Repository</th>
+              <th scope="col">Project</th>
+              <th scope="col" class="n">Tokens</th>
+              <th scope="col" class="n">Share of archive</th>
+              <th scope="col" class="n">Documentation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>SBC</td><td>SBC Knowledge Platform</td><td class="n">553,001</td><td class="n">20.96%</td><td class="n">20%</td></tr>
+            <tr><td>sentinel-orchestrator</td><td>Sentinel Orchestrator</td><td class="n">418,667</td><td class="n">15.87%</td><td class="n">15%</td></tr>
+            <tr><td>Self-Learning-AI</td><td>Self-Learning AI</td><td class="n">380,838</td><td class="n">14.43%</td><td class="n">16%</td></tr>
+            <tr><td>ai-freelance-hunter</td><td>AI Freelance Hunter</td><td class="n">360,393</td><td class="n">13.66%</td><td class="n">5%</td></tr>
+            <tr><td>ugaf-development-kit</td><td>UGAF</td><td class="n">317,541</td><td class="n">12.03%</td><td class="n">23%</td></tr>
+            <tr><td>Unified-AI-Data-Intelligence-Platform</td><td>Unified AI Data Intelligence</td><td class="n">208,609</td><td class="n">7.91%</td><td class="n">11%</td></tr>
+            <tr><td>bambu-a1-camera-monitor</td><td>Bambu A1 Camera Monitor</td><td class="n">98,697</td><td class="n">3.74%</td><td class="n">54%</td></tr>
+            <tr><td>gameagent-uagip</td><td>UAGIP GameAgent</td><td class="n">95,728</td><td class="n">3.63%</td><td class="n">16%</td></tr>
+            <tr><td>ai-lean-six-sigma-analyst</td><td>AI Lean Six Sigma Analyst</td><td class="n">80,516</td><td class="n">3.05%</td><td class="n">5%</td></tr>
+            <tr><td>ai-dashboard-platform</td><td>AI Dashboard Platform</td><td class="n">56,167</td><td class="n">2.13%</td><td class="n">13%</td></tr>
+            <tr><td>daagent-dashboard</td><td>DAAgent</td><td class="n">29,500</td><td class="n">1.12%</td><td class="n">4%</td></tr>
+            <tr><td>radxa-cubie-a5e-case</td><td>Radxa Cubie A5E Case</td><td class="n">27,741</td><td class="n">1.05%</td><td class="n">70%</td></tr>
+            <tr><td>nse-derivatives-feed</td><td>NSE Derivatives Feed</td><td class="n">11,214</td><td class="n">0.43%</td><td class="n">5%</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><th scope="row">Total</th><td>13 repositories</td><td class="n">2,638,612</td><td class="n">100%</td><td class="n">17.1%</td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </details>
+  </section>
 
-      <article class="card">
-        <div class="card-top">
-          <div>
-            <h3>AI Dashboard Platform</h3>
-            <div class="repo">ai-dashboard-platform</div>
-          </div>
-          <span class="chip b">Gaps noted</span>
-        </div>
-        <p>CSV, XLSX or JSON in, interactive audience-segmented dashboard out, via a five-node AI pipeline. The AI emits only JSON specifications; the frontend owns all rendering.</p>
-        <div class="stack">Next.js 14 · Express · TypeScript · n8n · ECharts · SQLite</div>
-        <div class="metrics">
-          <div><span class="mv">56k</span><span class="mk">Tokens</span></div>
-          <div><span class="mv">66</span><span class="mk">Files</span></div>
-          <div><span class="mv">0</span><span class="mk">Tests</span></div>
-          <div><span class="mv">8</span><span class="mk">Doc files</span></div>
-        </div>
-        <div class="flag">No tests; duplicate snapshot left behind at GITHUB\Website</div>
-        <div class="links"><a href="https://github.com/fshbet/ai-dashboard-platform">Repository</a></div>
-      </article>
+  <section class="sec" id="projects" aria-labelledby="h-projects">
+    <div class="sec-head">
+      <span class="sec-no">&sect;03</span>
+      <h2 id="h-projects">Projects</h2>
+      <span class="hint">status is the project's own claim</span>
+    </div>
+    <p class="sub">
+      Two groups, and the division is the point: complete work and unfinished work sit on the same
+      page, at the same size. Nothing is hidden because it is not done. Filter by status, by domain,
+      or search the stacks.
+    </p>
 
-      <article class="card">
-        <div class="card-top">
-          <div>
-            <h3>DAAgent</h3>
-            <div class="repo">daagent-dashboard</div>
-          </div>
-          <span class="chip b">Gaps noted</span>
+    <div class="filters">
+      <div class="frow" role="group" aria-label="Filter by status">
+        <span class="label" id="l-status">Status</span>
+        <button class="chipbtn" type="button" data-f="status" data-v="all" aria-pressed="true">All <span class="num">13</span></button>
+        <button class="chipbtn" type="button" data-f="status" data-v="ok" aria-pressed="false">Complete <span class="num">7</span></button>
+        <button class="chipbtn" type="button" data-f="status" data-v="gaps" aria-pressed="false">Known gaps <span class="num">6</span></button>
+      </div>
+      <div class="frow" role="group" aria-label="Filter by domain">
+        <span class="label">Domain</span>
+        <button class="chipbtn" type="button" data-f="domain" data-v="all" aria-pressed="true">All</button>
+        <button class="chipbtn" type="button" data-f="domain" data-v="AI" aria-pressed="false">AI</button>
+        <button class="chipbtn" type="button" data-f="domain" data-v="Automation" aria-pressed="false">Automation</button>
+        <button class="chipbtn" type="button" data-f="domain" data-v="Data" aria-pressed="false">Data</button>
+        <button class="chipbtn" type="button" data-f="domain" data-v="Dev Tools" aria-pressed="false">Dev Tools</button>
+        <button class="chipbtn" type="button" data-f="domain" data-v="Hardware" aria-pressed="false">Hardware</button>
+        <button class="chipbtn" type="button" data-f="domain" data-v="CAD" aria-pressed="false">CAD</button>
+        <button class="chipbtn" type="button" data-f="domain" data-v="Trading" aria-pressed="false">Trading</button>
+      </div>
+      <div class="frow">
+        <div class="search">
+          <label class="label" for="q">Search</label>
+          <span class="search-wrap">
+            <svg aria-hidden="true"><use href="#i-search"/></svg>
+            <input type="search" id="q" placeholder="fastapi, opencv, turso, postgres&hellip;" autocomplete="off" spellcheck="false">
+          </span>
         </div>
-        <p>Upload a file, get a dashboard, then ask questions in plain English. A SQL agent writes the query and <code>sqlglot</code> validates it before it ever reaches the database.</p>
-        <div class="stack">FastAPI · PostgreSQL · Celery · Redis · sqlglot · Ollama</div>
-        <div class="metrics">
-          <div><span class="mv">30k</span><span class="mk">Tokens</span></div>
-          <div><span class="mv">29</span><span class="mk">Files</span></div>
-          <div><span class="mv">0</span><span class="mk">Tests</span></div>
-          <div><span class="mv">2</span><span class="mk">Doc files</span></div>
-        </div>
-        <div class="flag">No test suite — the clearest next step</div>
-        <div class="links"><a href="https://github.com/fshbet/daagent-dashboard">Repository</a></div>
-      </article>
+        <p class="fstatus" id="fstatus" role="status">Showing <b>13</b> of 13</p>
+      </div>
+    </div>
 
-      <article class="card">
+    <div class="group ok" id="g-ok">
+      <div class="group-head">
+        <div>
+          <h3><svg aria-hidden="true"><use href="#i-check"/></svg>Complete</h3>
+          <p class="gdesc">Documented end to end, tested, and running. Each carries a written record of its own architecture — an <code>INDEX.md</code>, a docs set, or design notes.</p>
+        </div>
+        <span class="gcount" data-count="ok">7 / 13</span>
+      </div>
+    <div class="cards">
+      <article class="card" id="p-sbc" data-status="ok" data-domains="AI|Data" data-text="sbc knowledge platform sbc an ai research platform that continuously discovers, validates, enriches and publishes information about single-board computers. typescript monorepo hono react libsql/turso pdfjs ai data  test files">
         <div class="card-top">
-          <div>
-            <h3>NSE Derivatives Feed</h3>
-            <div class="repo">nse-derivatives-feed</div>
+          <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.3" stroke-linecap="square"><rect x="6.5" y="6.5" width="11" height="11"/><circle cx="10" cy="10" r=".8"/><circle cx="14" cy="10" r=".8"/><circle cx="10" cy="14" r=".8"/><circle cx="14" cy="14" r=".8"/><path d="M3 9.5h3.5M3 14.5h3.5M17.5 9.5H21M17.5 14.5H21M9.5 3v3.5M14.5 3v3.5M9.5 17.5V21M14.5 17.5V21"/></svg></span>
+          <div class="card-id">
+            <span class="repo">SBC</span>
+            <h4>SBC Knowledge Platform</h4>
           </div>
-          <span class="chip b">Gaps noted</span>
+          <span class="card-idx">01</span>
         </div>
-        <p>Streams live NSE option-chain data from the Upstox WebSocket into PostgreSQL and serves it over REST, tracking open-interest changes between ticks.</p>
-        <div class="stack">Node.js · Express · PostgreSQL · Upstox WS v2 · node-cron</div>
-        <div class="metrics">
-          <div><span class="mv">11k</span><span class="mk">Tokens</span></div>
-          <div><span class="mv">14</span><span class="mk">Files</span></div>
-          <div><span class="mv">1</span><span class="mk">Tests</span></div>
-          <div><span class="mv">2</span><span class="mk">Doc files</span></div>
+        <span class="chip s-ok"><svg aria-hidden="true"><use href="#i-check"/></svg>Ready</span>
+        <p class="purpose">An AI research platform that continuously discovers, validates, enriches and publishes information about single-board computers.</p>
+        <div class="tags"><span class="tag">TypeScript monorepo</span><span class="tag">Hono</span><span class="tag">React</span><span class="tag">libSQL/Turso</span><span class="tag">pdfjs</span></div>
+        <div class="mrow">
+          <div><b class="num">553k</b><span class="label">Tokens</span></div>
+          <div><b class="num">229</b><span class="label">Files</span></div>
+          <div><b class="num">4</b><span class="label">Test files</span></div>
+          <div><b class="num">52</b><span class="label">Doc files</span></div>
         </div>
-        <div class="flag">Misnamed — it is a backend, not a frontend; CRA boilerplate remains</div>
-        <div class="links"><span class="none">Not public</span></div>
+        <div class="links">
+          <a href="https://github.com/fshbet/SBC" rel="noopener">Repository <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <details class="detail">
+          <summary><svg aria-hidden="true"><use href="#i-chev"/></svg>Full record</summary>
+          <div class="detail-body">
+            <p>An AI research platform that continuously discovers, validates, enriches and publishes information about single-board computers. India-first, then global — not a price-comparison site. The largest project here.</p>
+            <dl class="dl">
+              <dt>Status</dt><dd class="wrap">Documented end to end, tested, and running.</dd>
+              <dt>Tokens</dt><dd>553,001</dd>
+              <dt>Share of archive</dt><dd>20.96%</dd>
+              <dt>Files</dt><dd>229 source, test, doc and config files</dd>
+              <dt>Test files</dt><dd>4</dd>
+              <dt>Documentation</dt><dd>52 files &middot; 20% of this repository's tokens</dd>
+              <dt>Stack</dt><dd class="wrap">TypeScript monorepo &middot; Hono &middot; React &middot; libSQL/Turso &middot; pdfjs</dd>
+              <dt>Domain</dt><dd class="wrap">AI, Data</dd>
+              <dt>Known gaps</dt><dd class="wrap">None recorded.</dd>
+            </dl>
+          </div>
+        </details>
       </article>
+      <article class="card" id="p-sentinel" data-status="ok" data-domains="AI|Automation|Dev Tools" data-text="sentinel orchestrator sentinel-orchestrator a domain-agnostic, mcp-first orchestration engine. describe the objective, not the workflow. python fastapi pydantic typer postgresql mcp ai automation dev tools apache-2.0 test files">
+        <div class="card-top">
+          <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.3" stroke-linecap="square"><circle cx="12" cy="12" r="2.6"/><circle cx="4.2" cy="5" r="1.8"/><circle cx="19.8" cy="5" r="1.8"/><circle cx="12" cy="20.5" r="1.8"/><path d="M5.6 6.3 10 10.2M18.4 6.3 14 10.2M12 14.6v4.1"/></svg></span>
+          <div class="card-id">
+            <span class="repo">sentinel-orchestrator</span>
+            <h4>Sentinel Orchestrator</h4>
+          </div>
+          <span class="card-idx">02</span>
+        </div>
+        <span class="chip s-ok"><svg aria-hidden="true"><use href="#i-check"/></svg>Ready</span>
+        <p class="purpose">A domain-agnostic, MCP-first orchestration engine. Describe the objective, not the workflow.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Pydantic</span><span class="tag">Typer</span><span class="tag">PostgreSQL</span><span class="tag">MCP</span></div>
+        <div class="mrow">
+          <div><b class="num">419k</b><span class="label">Tokens</span></div>
+          <div><b class="num">219</b><span class="label">Files</span></div>
+          <div><b class="num">32</b><span class="label">Test files</span></div>
+          <div><b class="num">55</b><span class="label">Doc files</span></div>
+        </div>
+        <div class="links">
+          <a href="https://github.com/fshbet/sentinel-orchestrator" rel="noopener">Repository <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <details class="detail">
+          <summary><svg aria-hidden="true"><use href="#i-chev"/></svg>Full record</summary>
+          <div class="detail-body">
+            <p>A domain-agnostic, MCP-first orchestration engine. Describe the objective, not the workflow — it decomposes the work, picks the capabilities, runs what it can in parallel, validates results and decides what to do on failure. No shipped agent roles, no hard-coded provider. 811 tests, with the multi-replica controls verified against a running Compose stack rather than only in unit tests.</p>
+            <dl class="dl">
+              <dt>Status</dt><dd class="wrap">Documented end to end, tested, and running.</dd>
+              <dt>Tokens</dt><dd>418,667</dd>
+              <dt>Share of archive</dt><dd>15.87%</dd>
+              <dt>Files</dt><dd>219 source, test, doc and config files</dd>
+              <dt>Test files</dt><dd>32</dd>
+              <dt>Documentation</dt><dd>55 files &middot; 15% of this repository's tokens</dd>
+              <dt>Licence</dt><dd>Apache-2.0</dd>
+              <dt>Stack</dt><dd class="wrap">Python &middot; FastAPI &middot; Pydantic &middot; Typer &middot; PostgreSQL &middot; MCP</dd>
+              <dt>Domain</dt><dd class="wrap">AI, Automation, Dev Tools</dd>
+              <dt>Known gaps</dt><dd class="wrap">None recorded.</dd>
+            </dl>
+          </div>
+        </details>
+      </article>
+      <article class="card" id="p-ugaf" data-status="ok" data-domains="Automation|Dev Tools" data-text="ugaf ugaf-development-kit plugin-based automation framework for android games and apps, driven from the desktop. python 3.13 fastapi adb opencv structlog automation dev tools  test files">
+        <div class="card-top">
+          <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.3" stroke-linecap="square"><rect x="7" y="2.8" width="10" height="18.4" rx="1.2"/><path d="M10.2 5.2h3.6"/><path d="M9.4 16.6c1.6-4.3 3.6-4.3 5.2 0"/><circle cx="9.4" cy="16.6" r="1.1"/><circle cx="14.6" cy="16.6" r="1.1"/></svg></span>
+          <div class="card-id">
+            <span class="repo">ugaf-development-kit</span>
+            <h4>UGAF</h4>
+          </div>
+          <span class="card-idx">05</span>
+        </div>
+        <span class="chip s-ok"><svg aria-hidden="true"><use href="#i-check"/></svg>Ready</span>
+        <p class="purpose">Plugin-based automation framework for Android games and apps, driven from the desktop.</p>
+        <div class="tags"><span class="tag">Python 3.13</span><span class="tag">FastAPI</span><span class="tag">ADB</span><span class="tag">OpenCV</span><span class="tag">structlog</span></div>
+        <div class="mrow">
+          <div><b class="num">317k</b><span class="label">Tokens</span></div>
+          <div><b class="num">272</b><span class="label">Files</span></div>
+          <div><b class="num">81</b><span class="label">Test files</span></div>
+          <div><b class="num">51</b><span class="label">Doc files</span></div>
+        </div>
+        <div class="links">
+          <a href="https://github.com/fshbet/ugaf-development-kit" rel="noopener">Repository <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <details class="detail">
+          <summary><svg aria-hidden="true"><use href="#i-chev"/></svg>Full record</summary>
+          <div class="detail-body">
+            <p>Plugin-based automation framework for Android games and apps, driven from the desktop. Web control panel handles device detection, live screen, tap/swipe, and emulator management with no code required.</p>
+            <dl class="dl">
+              <dt>Status</dt><dd class="wrap">Documented end to end, tested, and running.</dd>
+              <dt>Tokens</dt><dd>317,541</dd>
+              <dt>Share of archive</dt><dd>12.03%</dd>
+              <dt>Files</dt><dd>272 source, test, doc and config files</dd>
+              <dt>Test files</dt><dd>81</dd>
+              <dt>Documentation</dt><dd>51 files &middot; 23% of this repository's tokens</dd>
+              <dt>Stack</dt><dd class="wrap">Python 3.13 &middot; FastAPI &middot; ADB &middot; OpenCV &middot; structlog</dd>
+              <dt>Domain</dt><dd class="wrap">Automation, Dev Tools</dd>
+              <dt>Known gaps</dt><dd class="wrap">None recorded.</dd>
+            </dl>
+          </div>
+        </details>
+      </article>
+      <article class="card" id="p-unified" data-status="ok" data-domains="AI|Data" data-text="unified ai data intelligence unified-ai-data-intelligence-platform an ai analyst for a whole data estate rather than a single database. fastapi next.js 16 duckdb sqlalchemy 2 pandas echarts ollama ai data  test files">
+        <div class="card-top">
+          <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.3" stroke-linecap="square"><path d="M3 6.5h7M3 12h5M3 17.5h7"/><path d="M10 6.5c5 0 3 5.5 8 5.5M8 12h10M10 17.5c5 0 3-5.5 8-5.5"/><circle cx="20.3" cy="12" r="1.7"/></svg></span>
+          <div class="card-id">
+            <span class="repo">Unified-AI-Data-Intelligence-Platform</span>
+            <h4>Unified AI Data Intelligence</h4>
+          </div>
+          <span class="card-idx">06</span>
+        </div>
+        <span class="chip s-ok"><svg aria-hidden="true"><use href="#i-check"/></svg>Ready</span>
+        <p class="purpose">An AI analyst for a whole data estate rather than a single database.</p>
+        <div class="tags"><span class="tag">FastAPI</span><span class="tag">Next.js 16</span><span class="tag">DuckDB</span><span class="tag">SQLAlchemy 2</span><span class="tag">pandas</span><span class="tag">ECharts</span><span class="tag">Ollama</span></div>
+        <div class="mrow">
+          <div><b class="num">209k</b><span class="label">Tokens</span></div>
+          <div><b class="num">138</b><span class="label">Files</span></div>
+          <div><b class="num">10</b><span class="label">Test files</span></div>
+          <div><b class="num">8</b><span class="label">Doc files</span></div>
+        </div>
+        <div class="links">
+          <a href="https://github.com/fshbet/Unified-AI-Data-Intelligence-Platform" rel="noopener">Repository <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <details class="detail">
+          <summary><svg aria-hidden="true"><use href="#i-chev"/></svg>Full record</summary>
+          <div class="detail-body">
+            <p>An AI analyst for a whole data estate rather than a single database. It builds a semantic layer over everything connected — files, SQL, MongoDB, Redis, REST, and the governed models inside Power BI and Tableau — then investigates across it: isolating what moved a metric, citing a query reference for every figure it prints, and declining to answer where the evidence is not there. A Power BI measure it cannot translate to SQL exactly is kept verbatim and marked uncomputable instead of approximated.</p>
+            <dl class="dl">
+              <dt>Status</dt><dd class="wrap">Documented end to end, tested, and running.</dd>
+              <dt>Tokens</dt><dd>208,609</dd>
+              <dt>Share of archive</dt><dd>7.91%</dd>
+              <dt>Files</dt><dd>138 source, test, doc and config files</dd>
+              <dt>Test files</dt><dd>10</dd>
+              <dt>Documentation</dt><dd>8 files &middot; 11% of this repository's tokens</dd>
+              <dt>Stack</dt><dd class="wrap">FastAPI &middot; Next.js 16 &middot; DuckDB &middot; SQLAlchemy 2 &middot; pandas &middot; ECharts &middot; Ollama</dd>
+              <dt>Domain</dt><dd class="wrap">AI, Data</dd>
+              <dt>Known gaps</dt><dd class="wrap">None recorded.</dd>
+            </dl>
+          </div>
+        </details>
+      </article>
+      <article class="card" id="p-bambu" data-status="ok" data-domains="Hardware" data-text="bambu a1 camera monitor bambu-a1-camera-monitor live streaming, snapshots, and timelapse capture for a bambu a1 3d printer, running on a raspberry pi zero 2 w with an ov5647 camera. python flask picamera2 libcamera ffmpeg hardware  test files">
+        <div class="card-top">
+          <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.3" stroke-linecap="square"><rect x="2.8" y="7" width="18.4" height="12.2" rx="1.2"/><circle cx="12" cy="13.1" r="3.4"/><path d="M8 7V4.8h5V7"/><path d="M17.8 10h.6"/></svg></span>
+          <div class="card-id">
+            <span class="repo">bambu-a1-camera-monitor</span>
+            <h4>Bambu A1 Camera Monitor</h4>
+          </div>
+          <span class="card-idx">07</span>
+        </div>
+        <span class="chip s-ok"><svg aria-hidden="true"><use href="#i-check"/></svg>Ready</span>
+        <p class="purpose">Live streaming, snapshots, and timelapse capture for a Bambu A1 3D printer, running on a Raspberry Pi Zero 2 W with an OV5647 camera.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">picamera2</span><span class="tag">libcamera</span><span class="tag">FFmpeg</span></div>
+        <div class="mrow">
+          <div><b class="num">99k</b><span class="label">Tokens</span></div>
+          <div><b class="num">48</b><span class="label">Files</span></div>
+          <div><b class="num">3</b><span class="label">Test files</span></div>
+          <div><b class="num">28</b><span class="label">Doc files</span></div>
+        </div>
+        <div class="links">
+          <span class="none"><svg aria-hidden="true"><use href="#i-lock"/></svg>Not public</span>
+        </div>
+        <details class="detail">
+          <summary><svg aria-hidden="true"><use href="#i-chev"/></svg>Full record</summary>
+          <div class="detail-body">
+            <p>Live streaming, snapshots, and timelapse capture for a Bambu A1 3D printer, running on a Raspberry Pi Zero 2 W with an OV5647 camera. Ships as a systemd service.</p>
+            <dl class="dl">
+              <dt>Status</dt><dd class="wrap">Documented end to end, tested, and running.</dd>
+              <dt>Tokens</dt><dd>98,697</dd>
+              <dt>Share of archive</dt><dd>3.74%</dd>
+              <dt>Files</dt><dd>48 source, test, doc and config files</dd>
+              <dt>Test files</dt><dd>3</dd>
+              <dt>Documentation</dt><dd>28 files &middot; 54% of this repository's tokens</dd>
+              <dt>Stack</dt><dd class="wrap">Python &middot; Flask &middot; picamera2 &middot; libcamera &middot; FFmpeg</dd>
+              <dt>Domain</dt><dd class="wrap">Hardware</dd>
+              <dt>Known gaps</dt><dd class="wrap">None recorded.</dd>
+            </dl>
+          </div>
+        </details>
+      </article>
+      <article class="card" id="p-lss" data-status="ok" data-domains="AI|Data" data-text="ai lean six sigma analyst ai-lean-six-sigma-analyst upload a dataset, get dmaic-structured root-cause analysis. streamlit pandas scipy statsmodels plotly ai data  test files">
+        <div class="card-top">
+          <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.3" stroke-linecap="square"><path d="M3.5 3.5v17h17"/><path d="M3.5 13h17" stroke-dasharray="2 2"/><path d="M6 16.5l3-5 3 3.5 3-7 3 4.5"/></svg></span>
+          <div class="card-id">
+            <span class="repo">ai-lean-six-sigma-analyst</span>
+            <h4>AI Lean Six Sigma Analyst</h4>
+          </div>
+          <span class="card-idx">09</span>
+        </div>
+        <span class="chip s-ok"><svg aria-hidden="true"><use href="#i-check"/></svg>Ready</span>
+        <p class="purpose">Upload a dataset, get DMAIC-structured root-cause analysis.</p>
+        <div class="tags"><span class="tag">Streamlit</span><span class="tag">pandas</span><span class="tag">SciPy</span><span class="tag">statsmodels</span><span class="tag">Plotly</span></div>
+        <div class="mrow">
+          <div><b class="num">81k</b><span class="label">Tokens</span></div>
+          <div><b class="num">69</b><span class="label">Files</span></div>
+          <div><b class="num">17</b><span class="label">Test files</span></div>
+          <div><b class="num">3</b><span class="label">Doc files</span></div>
+        </div>
+        <div class="links">
+          <a href="https://github.com/fshbet/ai-lean-six-sigma-analyst" rel="noopener">Repository <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <details class="detail">
+          <summary><svg aria-hidden="true"><use href="#i-chev"/></svg>Full record</summary>
+          <div class="detail-body">
+            <p>Upload a dataset, get DMAIC-structured root-cause analysis. Python computes every statistic; the model only interprets structured evidence — and the app still works with the LLM switched off.</p>
+            <dl class="dl">
+              <dt>Status</dt><dd class="wrap">Documented end to end, tested, and running.</dd>
+              <dt>Tokens</dt><dd>80,516</dd>
+              <dt>Share of archive</dt><dd>3.05%</dd>
+              <dt>Files</dt><dd>69 source, test, doc and config files</dd>
+              <dt>Test files</dt><dd>17</dd>
+              <dt>Documentation</dt><dd>3 files &middot; 5% of this repository's tokens</dd>
+              <dt>Stack</dt><dd class="wrap">Streamlit &middot; pandas &middot; SciPy &middot; statsmodels &middot; Plotly</dd>
+              <dt>Domain</dt><dd class="wrap">AI, Data</dd>
+              <dt>Known gaps</dt><dd class="wrap">None recorded.</dd>
+            </dl>
+          </div>
+        </details>
+      </article>
+      <article class="card" id="p-radxa" data-status="ok" data-domains="Hardware|CAD" data-text="radxa cubie a5e case radxa-cubie-a5e-case a parametric, screwless enclosure for the radxa cubie a5e single-board computer. openscad opencascade manifold3d step b-rep hardware cad cc by 4.0 printed parts">
+        <div class="card-top">
+          <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.3" stroke-linecap="square"><path d="M12 3.2 20.5 7.6v8.8L12 20.8 3.5 16.4V7.6z"/><path d="M3.5 7.6 12 12l8.5-4.4M12 12v8.8" stroke-dasharray="2.4 2"/></svg></span>
+          <div class="card-id">
+            <span class="repo">radxa-cubie-a5e-case</span>
+            <h4>Radxa Cubie A5E Case</h4>
+          </div>
+          <span class="card-idx">12</span>
+        </div>
+        <span class="chip s-ok"><svg aria-hidden="true"><use href="#i-check"/></svg>Ready</span>
+        <p class="purpose">A parametric, screwless enclosure for the Radxa Cubie A5E single-board computer.</p>
+        <div class="tags"><span class="tag">OpenSCAD</span><span class="tag">OpenCASCADE</span><span class="tag">manifold3d</span><span class="tag">STEP B-Rep</span></div>
+        <div class="mrow">
+          <div><b class="num">28k</b><span class="label">Tokens</span></div>
+          <div><b class="num">10</b><span class="label">Files</span></div>
+          <div><b class="num">2</b><span class="label">Printed parts</span></div>
+          <div><b class="num">6</b><span class="label">Doc files</span></div>
+        </div>
+        <div class="links">
+          <a href="https://github.com/fshbet/radxa-cubie-a5e-case" rel="noopener">Repository <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a href="https://fshbet.github.io/radxa-cubie-a5e-case/" rel="noopener">Guide <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a href="https://makerworld.com/en/models/3226207-radxa-cubie-a5e-case-screwless-parametric" rel="noopener">MakerWorld <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a href="https://www.thingiverse.com/thing:7401482" rel="noopener">Thingiverse <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <details class="detail">
+          <summary><svg aria-hidden="true"><use href="#i-chev"/></svg>Full record</summary>
+          <div class="detail-body">
+            <p>A parametric, screwless enclosure for the Radxa Cubie A5E single-board computer. Every dimension was read out of Radxa's official STEP file through OpenCASCADE — 316 solids, exact bounding boxes — rather than measured from photographs. Two printed parts, no fasteners, no supports. Print-verified.</p>
+            <dl class="dl">
+              <dt>Status</dt><dd class="wrap">Documented end to end, tested, and running.</dd>
+              <dt>Tokens</dt><dd>27,741</dd>
+              <dt>Share of archive</dt><dd>1.05%</dd>
+              <dt>Files</dt><dd>10 source, test, doc and config files</dd>
+              <dt>Printed parts</dt><dd>2</dd>
+              <dt>Documentation</dt><dd>6 files &middot; 70% of this repository's tokens</dd>
+              <dt>Licence</dt><dd>CC BY 4.0</dd>
+              <dt>Stack</dt><dd class="wrap">OpenSCAD &middot; OpenCASCADE &middot; manifold3d &middot; STEP B-Rep</dd>
+              <dt>Domain</dt><dd class="wrap">Hardware, CAD</dd>
+              <dt>Known gaps</dt><dd class="wrap">None recorded.</dd>
+            </dl>
+          </div>
+        </details>
+      </article>
+    </div>
+    </div>
+    <div class="group gaps" id="g-gaps">
+      <div class="group-head">
+        <div>
+          <h3><svg aria-hidden="true"><use href="#i-warn"/></svg>Working, with known gaps</h3>
+          <p class="gdesc">Functional and worth reading, but not finished. Each states its gaps plainly rather than papering over them. Unfinished is not the same as hidden.</p>
+        </div>
+        <span class="gcount" data-count="gaps">6 / 13</span>
+      </div>
+    <div class="cards">
+      <article class="card" id="p-self-learning" data-status="gaps" data-domains="AI|Data" data-text="self-learning ai self-learning-ai a knowledge base that maintains itself. python 3.12 fastapi postgresql + pgvector ollama react alembic ai data  test files">
+        <div class="card-top">
+          <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.3" stroke-linecap="square"><circle cx="12" cy="12" r="2.3"/><path d="M12 3.5a8.5 8.5 0 0 1 8.3 6.7M20.5 12a8.5 8.5 0 0 1-6.7 8.3M3.7 14a8.5 8.5 0 0 1 2.6-9.4"/><path d="M18.4 9.3l1.9 1.1 1-1.9M15 19.4l-1.2 1.9 2 .9M4.1 7.3 3.5 5.1l2.2-.4"/></svg></span>
+          <div class="card-id">
+            <span class="repo">Self-Learning-AI</span>
+            <h4>Self-Learning AI</h4>
+          </div>
+          <span class="card-idx">03</span>
+        </div>
+        <span class="chip s-gaps"><svg aria-hidden="true"><use href="#i-warn"/></svg>Gaps noted</span>
+        <p class="purpose">A knowledge base that maintains itself.</p>
+        <div class="tags"><span class="tag">Python 3.12</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL + pgvector</span><span class="tag">Ollama</span><span class="tag">React</span><span class="tag">Alembic</span></div>
+        <div class="mrow">
+          <div><b class="num">381k</b><span class="label">Tokens</span></div>
+          <div><b class="num">223</b><span class="label">Files</span></div>
+          <div><b class="num">39</b><span class="label">Test files</span></div>
+          <div><b class="num">17</b><span class="label">Doc files</span></div>
+        </div>
+        <p class="gapflag"><svg aria-hidden="true"><use href="#i-warn"/></svg><span><b>Known gap.</b> Beta by its own report — 8 of 12 golden questions pass, one concept is missing from the corpus entirely</span></p>
+        <div class="links">
+          <a href="https://github.com/fshbet/Self-Learning-AI" rel="noopener">Repository <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <details class="detail">
+          <summary><svg aria-hidden="true"><use href="#i-chev"/></svg>Full record</summary>
+          <div class="detail-body">
+            <p>A knowledge base that maintains itself. It crawls declared sources, extracts claims with verbatim-quote verification, tracks each one through a lifecycle of conflicts, staleness and supersession, and answers questions with citations back to the evidence. Retrieval runs four channels and records why every item ranked where it did; answers are planned deterministically, checked for completeness, and regenerated at most once. The core knows nothing about any subject — Power BI and a synthetic robotics lab are plugins.</p>
+            <dl class="dl">
+              <dt>Status</dt><dd class="wrap">Functional and worth reading, but not finished.</dd>
+              <dt>Tokens</dt><dd>380,838</dd>
+              <dt>Share of archive</dt><dd>14.43%</dd>
+              <dt>Files</dt><dd>223 source, test, doc and config files</dd>
+              <dt>Test files</dt><dd>39</dd>
+              <dt>Documentation</dt><dd>17 files &middot; 16% of this repository's tokens</dd>
+              <dt>Stack</dt><dd class="wrap">Python 3.12 &middot; FastAPI &middot; PostgreSQL + pgvector &middot; Ollama &middot; React &middot; Alembic</dd>
+              <dt>Domain</dt><dd class="wrap">AI, Data</dd>
+              <dt>Known gaps</dt><dd class="wrap">Beta by its own report — 8 of 12 golden questions pass, one concept is missing from the corpus entirely</dd>
+            </dl>
+          </div>
+        </details>
+      </article>
+      <article class="card" id="p-freelance" data-status="gaps" data-domains="AI|Automation" data-text="ai freelance hunter ai-freelance-hunter crawls ten freelance platforms, deduplicates and scores every posting on feasibility, profitability, competition and risk, then drafts proposals. fastapi next.js 14 postgresql redis celery kubernetes ai automation  test files">
+        <div class="card-top">
+          <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.3" stroke-linecap="square"><path d="M3.5 4.5h17l-6.4 7.6v7.4l-4.2-2.3v-5.1z"/><path d="M16.5 16h5M16.5 19h3.2"/></svg></span>
+          <div class="card-id">
+            <span class="repo">ai-freelance-hunter</span>
+            <h4>AI Freelance Hunter</h4>
+          </div>
+          <span class="card-idx">04</span>
+        </div>
+        <span class="chip s-gaps"><svg aria-hidden="true"><use href="#i-warn"/></svg>Gaps noted</span>
+        <p class="purpose">Crawls ten freelance platforms, deduplicates and scores every posting on feasibility, profitability, competition and risk, then drafts proposals.</p>
+        <div class="tags"><span class="tag">FastAPI</span><span class="tag">Next.js 14</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">Celery</span><span class="tag">Kubernetes</span></div>
+        <div class="mrow">
+          <div><b class="num">360k</b><span class="label">Tokens</span></div>
+          <div><b class="num">368</b><span class="label">Files</span></div>
+          <div><b class="num">54</b><span class="label">Test files</span></div>
+          <div><b class="num">9</b><span class="label">Doc files</span></div>
+        </div>
+        <p class="gapflag"><svg aria-hidden="true"><use href="#i-warn"/></svg><span><b>Known gap.</b> No README — INDEX.md now serves as the front door</span></p>
+        <div class="links">
+          <a href="https://github.com/fshbet/ai-freelance-hunter" rel="noopener">Repository <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <details class="detail">
+          <summary><svg aria-hidden="true"><use href="#i-chev"/></svg>Full record</summary>
+          <div class="detail-body">
+            <p>Crawls ten freelance platforms, deduplicates and scores every posting on feasibility, profitability, competition and risk, then drafts proposals.</p>
+            <dl class="dl">
+              <dt>Status</dt><dd class="wrap">Functional and worth reading, but not finished.</dd>
+              <dt>Tokens</dt><dd>360,393</dd>
+              <dt>Share of archive</dt><dd>13.66%</dd>
+              <dt>Files</dt><dd>368 source, test, doc and config files</dd>
+              <dt>Test files</dt><dd>54</dd>
+              <dt>Documentation</dt><dd>9 files &middot; 5% of this repository's tokens</dd>
+              <dt>Stack</dt><dd class="wrap">FastAPI &middot; Next.js 14 &middot; PostgreSQL &middot; Redis &middot; Celery &middot; Kubernetes</dd>
+              <dt>Domain</dt><dd class="wrap">AI, Automation</dd>
+              <dt>Known gaps</dt><dd class="wrap">No README — INDEX.md now serves as the front door</dd>
+            </dl>
+          </div>
+        </details>
+      </article>
+      <article class="card" id="p-gameagent" data-status="gaps" data-domains="AI|Automation" data-text="uagip gameagent gameagent-uagip autonomous game-playing agents: capture, vision, state, decision, action, memory. python opencv easyocr yolo langchain ollama ai automation  test files">
+        <div class="card-top">
+          <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.3" stroke-linecap="square"><path d="M3.5 8V3.5H8M16 3.5h4.5V8M20.5 16v4.5H16M8 20.5H3.5V16"/><circle cx="12" cy="12" r="3"/><path d="M12 7.2v1.8M12 15v1.8M7.2 12H9M15 12h1.8"/></svg></span>
+          <div class="card-id">
+            <span class="repo">gameagent-uagip</span>
+            <h4>UAGIP GameAgent</h4>
+          </div>
+          <span class="card-idx">08</span>
+        </div>
+        <span class="chip s-gaps"><svg aria-hidden="true"><use href="#i-warn"/></svg>Gaps noted</span>
+        <p class="purpose">Autonomous game-playing agents: capture, vision, state, decision, action, memory.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">EasyOCR</span><span class="tag">YOLO</span><span class="tag">LangChain</span><span class="tag">Ollama</span></div>
+        <div class="mrow">
+          <div><b class="num">96k</b><span class="label">Tokens</span></div>
+          <div><b class="num">148</b><span class="label">Files</span></div>
+          <div><b class="num">14</b><span class="label">Test files</span></div>
+          <div><b class="num">65</b><span class="label">Doc files</span></div>
+        </div>
+        <p class="gapflag"><svg aria-hidden="true"><use href="#i-warn"/></svg><span><b>Known gap.</b> MODULE_STATUS.md is stale — understates real progress</span></p>
+        <div class="links">
+          <a href="https://github.com/fshbet/gameagent-uagip" rel="noopener">Repository <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <details class="detail">
+          <summary><svg aria-hidden="true"><use href="#i-chev"/></svg>Full record</summary>
+          <div class="detail-body">
+            <p>Autonomous game-playing agents: capture, vision, state, decision, action, memory. Foundation, capture engine, ADB adapter, vision layer and dataset platform all shipped through tag v0.6.</p>
+            <dl class="dl">
+              <dt>Status</dt><dd class="wrap">Functional and worth reading, but not finished.</dd>
+              <dt>Tokens</dt><dd>95,728</dd>
+              <dt>Share of archive</dt><dd>3.63%</dd>
+              <dt>Files</dt><dd>148 source, test, doc and config files</dd>
+              <dt>Test files</dt><dd>14</dd>
+              <dt>Documentation</dt><dd>65 files &middot; 16% of this repository's tokens</dd>
+              <dt>Stack</dt><dd class="wrap">Python &middot; OpenCV &middot; EasyOCR &middot; YOLO &middot; LangChain &middot; Ollama</dd>
+              <dt>Domain</dt><dd class="wrap">AI, Automation</dd>
+              <dt>Known gaps</dt><dd class="wrap">MODULE_STATUS.md is stale — understates real progress</dd>
+            </dl>
+          </div>
+        </details>
+      </article>
+      <article class="card" id="p-aidash" data-status="gaps" data-domains="AI|Data" data-text="ai dashboard platform ai-dashboard-platform csv, xlsx or json in, interactive audience-segmented dashboard out, via a five-node ai pipeline. next.js 14 express typescript n8n echarts sqlite ai data  test files">
+        <div class="card-top">
+          <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.3" stroke-linecap="square"><rect x="3.2" y="3.2" width="7.6" height="6"/><rect x="13.2" y="3.2" width="7.6" height="11"/><rect x="3.2" y="12.2" width="7.6" height="8.6"/><rect x="13.2" y="17.2" width="7.6" height="3.6"/></svg></span>
+          <div class="card-id">
+            <span class="repo">ai-dashboard-platform</span>
+            <h4>AI Dashboard Platform</h4>
+          </div>
+          <span class="card-idx">10</span>
+        </div>
+        <span class="chip s-gaps"><svg aria-hidden="true"><use href="#i-warn"/></svg>Gaps noted</span>
+        <p class="purpose">CSV, XLSX or JSON in, interactive audience-segmented dashboard out, via a five-node AI pipeline.</p>
+        <div class="tags"><span class="tag">Next.js 14</span><span class="tag">Express</span><span class="tag">TypeScript</span><span class="tag">n8n</span><span class="tag">ECharts</span><span class="tag">SQLite</span></div>
+        <div class="mrow">
+          <div><b class="num">56k</b><span class="label">Tokens</span></div>
+          <div><b class="num">66</b><span class="label">Files</span></div>
+          <div><b class="num zero">0</b><span class="label">Test files</span></div>
+          <div><b class="num">8</b><span class="label">Doc files</span></div>
+        </div>
+        <p class="gapflag"><svg aria-hidden="true"><use href="#i-warn"/></svg><span><b>Known gap.</b> No tests; duplicate snapshot left behind at GITHUB\Website</span></p>
+        <div class="links">
+          <a href="https://github.com/fshbet/ai-dashboard-platform" rel="noopener">Repository <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <details class="detail">
+          <summary><svg aria-hidden="true"><use href="#i-chev"/></svg>Full record</summary>
+          <div class="detail-body">
+            <p>CSV, XLSX or JSON in, interactive audience-segmented dashboard out, via a five-node AI pipeline. The AI emits only JSON specifications; the frontend owns all rendering.</p>
+            <dl class="dl">
+              <dt>Status</dt><dd class="wrap">Functional and worth reading, but not finished.</dd>
+              <dt>Tokens</dt><dd>56,167</dd>
+              <dt>Share of archive</dt><dd>2.13%</dd>
+              <dt>Files</dt><dd>66 source, test, doc and config files</dd>
+              <dt>Test files</dt><dd>0</dd>
+              <dt>Documentation</dt><dd>8 files &middot; 13% of this repository's tokens</dd>
+              <dt>Stack</dt><dd class="wrap">Next.js 14 &middot; Express &middot; TypeScript &middot; n8n &middot; ECharts &middot; SQLite</dd>
+              <dt>Domain</dt><dd class="wrap">AI, Data</dd>
+              <dt>Known gaps</dt><dd class="wrap">No tests; duplicate snapshot left behind at GITHUB\Website</dd>
+            </dl>
+          </div>
+        </details>
+      </article>
+      <article class="card" id="p-daagent" data-status="gaps" data-domains="AI|Data" data-text="daagent daagent-dashboard upload a file, get a dashboard, then ask questions in plain english. fastapi postgresql celery redis sqlglot ollama ai data  test files">
+        <div class="card-top">
+          <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.3" stroke-linecap="square"><path d="M3.5 5.5l3 3-3 3"/><path d="M9 11.5h5"/><rect x="3.5" y="14.5" width="17" height="6"/><path d="M3.5 17.5h17M10 14.5v6"/></svg></span>
+          <div class="card-id">
+            <span class="repo">daagent-dashboard</span>
+            <h4>DAAgent</h4>
+          </div>
+          <span class="card-idx">11</span>
+        </div>
+        <span class="chip s-gaps"><svg aria-hidden="true"><use href="#i-warn"/></svg>Gaps noted</span>
+        <p class="purpose">Upload a file, get a dashboard, then ask questions in plain English.</p>
+        <div class="tags"><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">Celery</span><span class="tag">Redis</span><span class="tag">sqlglot</span><span class="tag">Ollama</span></div>
+        <div class="mrow">
+          <div><b class="num">30k</b><span class="label">Tokens</span></div>
+          <div><b class="num">29</b><span class="label">Files</span></div>
+          <div><b class="num zero">0</b><span class="label">Test files</span></div>
+          <div><b class="num">2</b><span class="label">Doc files</span></div>
+        </div>
+        <p class="gapflag"><svg aria-hidden="true"><use href="#i-warn"/></svg><span><b>Known gap.</b> No test suite — the clearest next step</span></p>
+        <div class="links">
+          <a href="https://github.com/fshbet/daagent-dashboard" rel="noopener">Repository <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <details class="detail">
+          <summary><svg aria-hidden="true"><use href="#i-chev"/></svg>Full record</summary>
+          <div class="detail-body">
+            <p>Upload a file, get a dashboard, then ask questions in plain English. A SQL agent writes the query and <code>sqlglot</code> validates it before it ever reaches the database.</p>
+            <dl class="dl">
+              <dt>Status</dt><dd class="wrap">Functional and worth reading, but not finished.</dd>
+              <dt>Tokens</dt><dd>29,500</dd>
+              <dt>Share of archive</dt><dd>1.12%</dd>
+              <dt>Files</dt><dd>29 source, test, doc and config files</dd>
+              <dt>Test files</dt><dd>0</dd>
+              <dt>Documentation</dt><dd>2 files &middot; 4% of this repository's tokens</dd>
+              <dt>Stack</dt><dd class="wrap">FastAPI &middot; PostgreSQL &middot; Celery &middot; Redis &middot; sqlglot &middot; Ollama</dd>
+              <dt>Domain</dt><dd class="wrap">AI, Data</dd>
+              <dt>Known gaps</dt><dd class="wrap">No test suite — the clearest next step</dd>
+            </dl>
+          </div>
+        </details>
+      </article>
+      <article class="card" id="p-nse" data-status="gaps" data-domains="Data|Trading" data-text="nse derivatives feed nse-derivatives-feed streams live nse option-chain data from the upstox websocket into postgresql and serves it over rest, tracking open-interest changes between ticks. node.js express postgresql upstox ws v2 node-cron data trading  test files">
+        <div class="card-top">
+          <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.3" stroke-linecap="square"><path d="M3.5 20.5V3.5"/><path d="M7 9v7M7 7v2M7 16v2M12 12v6M12 10v2M12 18v2M17 6v8M17 4v2M17 14v2"/><path d="M5.6 9h2.8M10.6 12h2.8M15.6 6h2.8M5.6 16h2.8M10.6 18h2.8M15.6 14h2.8"/></svg></span>
+          <div class="card-id">
+            <span class="repo">nse-derivatives-feed</span>
+            <h4>NSE Derivatives Feed</h4>
+          </div>
+          <span class="card-idx">13</span>
+        </div>
+        <span class="chip s-gaps"><svg aria-hidden="true"><use href="#i-warn"/></svg>Gaps noted</span>
+        <p class="purpose">Streams live NSE option-chain data from the Upstox WebSocket into PostgreSQL and serves it over REST, tracking open-interest changes between ticks.</p>
+        <div class="tags"><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">PostgreSQL</span><span class="tag">Upstox WS v2</span><span class="tag">node-cron</span></div>
+        <div class="mrow">
+          <div><b class="num">11k</b><span class="label">Tokens</span></div>
+          <div><b class="num">14</b><span class="label">Files</span></div>
+          <div><b class="num">1</b><span class="label">Test files</span></div>
+          <div><b class="num">2</b><span class="label">Doc files</span></div>
+        </div>
+        <p class="gapflag"><svg aria-hidden="true"><use href="#i-warn"/></svg><span><b>Known gap.</b> Misnamed — it is a backend, not a frontend; CRA boilerplate remains</span></p>
+        <div class="links">
+          <span class="none"><svg aria-hidden="true"><use href="#i-lock"/></svg>Not public</span>
+        </div>
+        <details class="detail">
+          <summary><svg aria-hidden="true"><use href="#i-chev"/></svg>Full record</summary>
+          <div class="detail-body">
+            <p>Streams live NSE option-chain data from the Upstox WebSocket into PostgreSQL and serves it over REST, tracking open-interest changes between ticks.</p>
+            <dl class="dl">
+              <dt>Status</dt><dd class="wrap">Functional and worth reading, but not finished.</dd>
+              <dt>Tokens</dt><dd>11,214</dd>
+              <dt>Share of archive</dt><dd>0.43%</dd>
+              <dt>Files</dt><dd>14 source, test, doc and config files</dd>
+              <dt>Test files</dt><dd>1</dd>
+              <dt>Documentation</dt><dd>2 files &middot; 5% of this repository's tokens</dd>
+              <dt>Stack</dt><dd class="wrap">Node.js &middot; Express &middot; PostgreSQL &middot; Upstox WS v2 &middot; node-cron</dd>
+              <dt>Domain</dt><dd class="wrap">Data, Trading</dd>
+              <dt>Known gaps</dt><dd class="wrap">Misnamed — it is a backend, not a frontend; CRA boilerplate remains</dd>
+            </dl>
+          </div>
+        </details>
+      </article>
+    </div>
+    </div>
+    <div class="noresults" id="noresults" hidden>
+      <p class="label">No match</p>
+      <p>Nothing in the archive matches that combination. <button class="chipbtn" type="button" id="clearf">Clear all filters</button></p>
     </div>
   </section>
 
-  <section>
-    <h2>How these are measured</h2>
-    <p class="sub">Every figure on this page is counted from source, not estimated.</p>
-    <div class="callout">
-      <h3>Methodology</h3>
-      <ul>
-        <li><strong>Tokens</strong> are counted with tiktoken <code>cl100k_base</code> across source, test, documentation and configuration files — the same encoding a language model would read them through.</li>
-        <li><strong>Excluded from every count:</strong> dependencies, virtual environments, lockfiles, generated API schemas, minified bundles and build output. What remains is authored code. For the CAD project that means the exported STL meshes are excluded — they are build output of the OpenSCAD source, which is what gets counted.</li>
-        <li><strong>Tests and documentation</strong> are reported separately from implementation, so each project's real ratio stays visible instead of being averaged away.</li>
-        <li><strong>Most</strong> repositories carry an <code>INDEX.md</code> written from their own source — architecture, usage, layout, and an explicit section naming what is missing. Four carry their own documentation set instead: SBC, Sentinel (29 topic guides and 12 architecture decision records), the CAD project, whose <code>docs/design-notes.md</code> holds the measurement table, the coordinate transform and the validation record, and the data-intelligence platform, which ships an architecture reference, an operator guide and a self-contained <code>how-it-works.html</code>.</li>
-        <li><strong>One card reads differently.</strong> The enclosure has no test suite, so its third metric counts printed <em>parts</em> rather than tests. Everything else on this page is software.</li>
-      </ul>
+  <section class="sec" id="stack" aria-labelledby="h-stack">
+    <div class="sec-head">
+      <span class="sec-no">&sect;04</span>
+      <h2 id="h-stack">Technology landscape</h2>
+      <span class="hint">select one to filter the archive</span>
+    </div>
+    <p class="sub">
+      Everything listed here appears in the stack of at least one project above &mdash; nothing is
+      included for completeness. Selecting a technology filters the project index.
+    </p>
+    <div class="stacks reveal">
+
+      <div class="stackcol">
+        <h3>Languages &amp; runtimes <span>04</span></h3>
+        <div class="techlist">
+          <button class="techlist-btn" type="button" data-tech="Python">Python 3.12 / 3.13</button>
+          <button class="techlist-btn" type="button" data-tech="TypeScript">TypeScript</button>
+          <button class="techlist-btn" type="button" data-tech="Node.js">Node.js</button>
+          <button class="techlist-btn" type="button" data-tech="OpenSCAD">OpenSCAD</button>
+        </div>
+      </div>
+
+      <div class="stackcol">
+        <h3>Application frameworks <span>09</span></h3>
+        <div class="techlist">
+          <button class="techlist-btn" type="button" data-tech="FastAPI">FastAPI</button>
+          <button class="techlist-btn" type="button" data-tech="Flask">Flask</button>
+          <button class="techlist-btn" type="button" data-tech="Hono">Hono</button>
+          <button class="techlist-btn" type="button" data-tech="Express">Express</button>
+          <button class="techlist-btn" type="button" data-tech="Next.js">Next.js 14 / 16</button>
+          <button class="techlist-btn" type="button" data-tech="React">React</button>
+          <button class="techlist-btn" type="button" data-tech="Streamlit">Streamlit</button>
+          <button class="techlist-btn" type="button" data-tech="Typer">Typer</button>
+          <button class="techlist-btn" type="button" data-tech="Pydantic">Pydantic</button>
+        </div>
+      </div>
+
+      <div class="stackcol">
+        <h3>Data &amp; storage <span>09</span></h3>
+        <div class="techlist">
+          <button class="techlist-btn" type="button" data-tech="PostgreSQL">PostgreSQL</button>
+          <button class="techlist-btn" type="button" data-tech="pgvector">pgvector</button>
+          <button class="techlist-btn" type="button" data-tech="DuckDB">DuckDB</button>
+          <button class="techlist-btn" type="button" data-tech="SQLite">SQLite</button>
+          <button class="techlist-btn" type="button" data-tech="Turso">libSQL / Turso</button>
+          <button class="techlist-btn" type="button" data-tech="Redis">Redis</button>
+          <button class="techlist-btn" type="button" data-tech="SQLAlchemy">SQLAlchemy 2</button>
+          <button class="techlist-btn" type="button" data-tech="Alembic">Alembic</button>
+          <button class="techlist-btn" type="button" data-tech="sqlglot">sqlglot</button>
+        </div>
+      </div>
+
+      <div class="stackcol">
+        <h3>AI, vision &amp; agents <span>06</span></h3>
+        <div class="techlist">
+          <button class="techlist-btn" type="button" data-tech="Ollama">Ollama</button>
+          <button class="techlist-btn" type="button" data-tech="LangChain">LangChain</button>
+          <button class="techlist-btn" type="button" data-tech="MCP">MCP</button>
+          <button class="techlist-btn" type="button" data-tech="YOLO">YOLO</button>
+          <button class="techlist-btn" type="button" data-tech="EasyOCR">EasyOCR</button>
+          <button class="techlist-btn" type="button" data-tech="OpenCV">OpenCV</button>
+        </div>
+      </div>
+
+      <div class="stackcol">
+        <h3>Analysis &amp; visualisation <span>06</span></h3>
+        <div class="techlist">
+          <button class="techlist-btn" type="button" data-tech="pandas">pandas</button>
+          <button class="techlist-btn" type="button" data-tech="SciPy">SciPy</button>
+          <button class="techlist-btn" type="button" data-tech="statsmodels">statsmodels</button>
+          <button class="techlist-btn" type="button" data-tech="Plotly">Plotly</button>
+          <button class="techlist-btn" type="button" data-tech="ECharts">ECharts</button>
+          <button class="techlist-btn" type="button" data-tech="pdfjs">pdfjs</button>
+        </div>
+      </div>
+
+      <div class="stackcol">
+        <h3>Infrastructure <span>05</span></h3>
+        <div class="techlist">
+          <button class="techlist-btn" type="button" data-tech="Kubernetes">Kubernetes</button>
+          <button class="techlist-btn" type="button" data-tech="Celery">Celery</button>
+          <button class="techlist-btn" type="button" data-tech="n8n">n8n</button>
+          <button class="techlist-btn" type="button" data-tech="structlog">structlog</button>
+          <button class="techlist-btn" type="button" data-tech="node-cron">node-cron</button>
+        </div>
+      </div>
+
+      <div class="stackcol">
+        <h3>Devices, media &amp; CAD <span>07</span></h3>
+        <div class="techlist">
+          <button class="techlist-btn" type="button" data-tech="ADB">ADB</button>
+          <button class="techlist-btn" type="button" data-tech="picamera2">picamera2</button>
+          <button class="techlist-btn" type="button" data-tech="libcamera">libcamera</button>
+          <button class="techlist-btn" type="button" data-tech="FFmpeg">FFmpeg</button>
+          <button class="techlist-btn" type="button" data-tech="OpenCASCADE">OpenCASCADE</button>
+          <button class="techlist-btn" type="button" data-tech="manifold3d">manifold3d</button>
+          <button class="techlist-btn" type="button" data-tech="STEP">STEP B-Rep</button>
+        </div>
+      </div>
     </div>
   </section>
 
+  <section class="sec" id="method" aria-labelledby="h-method">
+    <div class="sec-head">
+      <span class="sec-no">&sect;05</span>
+      <h2 id="h-method">How this archive is measured</h2>
+      <span class="hint">counted from source</span>
+    </div>
+    <p class="sub">
+      Every number on this page comes out of the repositories themselves. None of it is estimated,
+      rounded up, or carried over from memory. This is the whole pipeline.
+    </p>
+
+    <ol class="pipe reveal">
+      <li class="stage">
+        <span class="sno">01</span>
+        <h3>Source</h3>
+        <p>Start from the working tree of each repository &mdash; the files actually authored, in the state they are in.</p>
+      </li>
+      <li class="stage">
+        <span class="sno">02</span>
+        <h3>Filter</h3>
+        <p>Drop dependencies, virtual environments, lockfiles, generated API schemas, minified bundles and build output.</p>
+      </li>
+      <li class="stage">
+        <span class="sno">03</span>
+        <h3>Measure</h3>
+        <p>Count tokens with tiktoken <code>cl100k_base</code> &mdash; the same encoding a language model reads the code through.</p>
+      </li>
+      <li class="stage">
+        <span class="sno">04</span>
+        <h3>Classify</h3>
+        <p>Separate code, tests, documentation and configuration, so each project's real ratio stays visible.</p>
+      </li>
+      <li class="stage">
+        <span class="sno">05</span>
+        <h3>Publish</h3>
+        <p>Print the figures as counted, alongside the gaps each repository records about itself.</p>
+      </li>
+    </ol>
+
+    <dl class="notes reveal">
+      <div class="note-row">
+        <dt>What a token is</dt>
+        <dd>Tokens are counted with tiktoken <code>cl100k_base</code> across source, test, documentation
+        and configuration files &mdash; <strong>the same encoding a language model would read them
+        through</strong>. It is a measure of how much there is to read, not a measure of quality.</dd>
+      </div>
+      <div class="note-row">
+        <dt>What is excluded</dt>
+        <dd>Dependencies, virtual environments, lockfiles, generated API schemas, minified bundles and
+        build output are excluded from every count. <strong>What remains is authored code.</strong> For
+        the CAD project that means the exported STL meshes are excluded &mdash; they are build output of
+        the OpenSCAD source, which is what gets counted.</dd>
+      </div>
+      <div class="note-row">
+        <dt>Why the split</dt>
+        <dd>Tests and documentation are reported separately from implementation, so each project's real
+        ratio stays visible <strong>instead of being averaged away</strong>. Documentation share per
+        repository on this page is derived from those same counts.</dd>
+      </div>
+      <div class="note-row">
+        <dt>Where the gaps come from</dt>
+        <dd><strong>Most</strong> repositories carry an <code>INDEX.md</code> written from their own
+        source &mdash; architecture, usage, layout, and an explicit section naming what is missing. Four
+        carry their own documentation set instead: SBC, Sentinel (29 topic guides and 12 architecture
+        decision records), the CAD project, whose <code>docs/design-notes.md</code> holds the
+        measurement table, the coordinate transform and the validation record, and the
+        data-intelligence platform, which ships an architecture reference, an operator guide and a
+        self-contained <code>how-it-works.html</code>.</dd>
+      </div>
+      <div class="note-row">
+        <dt>One card reads differently</dt>
+        <dd>The enclosure has no test suite, so its third metric counts printed <strong>parts</strong>
+        rather than test files. Everything else on this page is software.</dd>
+      </div>
+      <div class="note-row">
+        <dt>On status</dt>
+        <dd><strong>Ready</strong> means documented end to end, tested, and running.
+        <strong>Gaps noted</strong> means functional and worth reading, but not finished &mdash; and the
+        gap is printed on the card rather than left for you to find. <strong>Not public</strong> means
+        there is no repository link to give; it does not mean the work does not exist.</dd>
+      </div>
+    </dl>
+  </section>
 </div>
+</main>
+
+<footer>
+  <div class="shell">
+    <div class="foot-grid">
+      <div class="foot-id">
+        <p class="fname">fshbet</p>
+        <p>Engineering systems, documenting what works, and being explicit about what doesn't.</p>
+      </div>
+      <div class="foot-links">
+        <div>
+          <span class="label">Archive</span>
+          <ul>
+            <li><a href="#archive">At a glance</a></li>
+            <li><a href="#weight">Token weight</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#stack">Technology</a></li>
+            <li><a href="#method">Methodology</a></li>
+          </ul>
+        </div>
+        <div>
+          <span class="label">Elsewhere</span>
+          <ul>
+            <li><a href="https://github.com/fshbet" rel="noopener">GitHub @fshbet</a></li>
+            <li><a href="https://fshbet.github.io/radxa-cubie-a5e-case/" rel="noopener">Cubie A5E case guide</a></li>
+            <li><a href="https://github.com/fshbet/fshbet.github.io" rel="noopener">This page's source</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="foot-meta">
+      <span>Updated <b>4 Oct 2026</b></span>
+      <span>13 repositories &middot; <b>2,638,612</b> tokens &middot; <b>1,833</b> files</span>
+      <span>Counted with <b>cl100k_base</b></span>
+      <span>Static page, no tracking, no analytics</span>
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var $  = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* -- theme ------------------------------------------------ */
+  var root = document.documentElement, tbtn = $('#theme');
+  function isLight() {
+    var set = root.getAttribute('data-theme');
+    if (set) return set === 'light';
+    return window.matchMedia('(prefers-color-scheme: light)').matches;
+  }
+  function syncTheme() {
+    var light = isLight();
+    tbtn.setAttribute('aria-pressed', String(light));
+    $('.vh', tbtn).textContent = light ? 'Switch to dark theme' : 'Switch to light theme';
+  }
+  tbtn.addEventListener('click', function () {
+    var next = isLight() ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('archive-theme', next); } catch (e) { /* storage unavailable */ }
+    syncTheme();
+  });
+  syncTheme();
+
+  /* -- mobile nav ------------------------------------------- */
+  var bar = $('.topbar'), burger = $('#burger');
+  function closeNav() {
+    bar.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    $('.vh', burger).textContent = 'Open section menu';
+  }
+  burger.addEventListener('click', function () {
+    var open = bar.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(open));
+    $('.vh', burger).textContent = open ? 'Close section menu' : 'Open section menu';
+  });
+  $$('#nav a').forEach(function (a) { a.addEventListener('click', closeNav); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && bar.classList.contains('open')) { closeNav(); burger.focus(); }
+  });
+  window.addEventListener('resize', function () { if (window.innerWidth > 860) closeNav(); });
+
+  /* -- active section in nav -------------------------------- */
+  var links = $$('#nav a');
+  var targets = links.map(function (a) { return $(a.getAttribute('href')); });
+  function markCurrent(node) {
+    var i = targets.indexOf(node);
+    links.forEach(function (a, j) {
+      if (j === i) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+    });
+  }
+
+  /* -- reveal, bar growth, count-up ------------------------- */
+  function grow(scope) {
+    $$('.ctrack i', scope).forEach(function (i) { i.style.width = i.getAttribute('data-w') + '%'; });
+  }
+  function countUp(el) {
+    var to = parseInt(el.getAttribute('data-to'), 10), dur = 520;
+    if (!to || calm.matches) return;
+    var final = el.textContent, t0 = performance.now();
+    function step() {
+      var k = Math.min(1, (performance.now() - t0) / dur);
+      if (k < 1) {
+        el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))).toLocaleString('en-US');
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = final;
+      }
+    }
+    requestAnimationFrame(step);
+    // rAF is throttled in background tabs; this guarantees the real figure is restored.
+    setTimeout(function () { el.textContent = final; }, dur + 400);
+  }
+
+  if ('IntersectionObserver' in window && !calm.matches) {
+    var io = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.classList.add('in');
+        grow(en.target);
+        $$('[data-to]', en.target).forEach(countUp);
+        obs.unobserve(en.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    $$('.reveal, .chart, .panel').forEach(function (el) { io.observe(el); });
+
+    // An element scrolled clean past (deep link, End key, hash jump) never enters the
+    // observer's root, so reveal anything already above the viewport outright.
+    var queued = false;
+    function sweep() {
+      queued = false;
+      $$('.reveal:not(.in)').forEach(function (el) {
+        if (el.getBoundingClientRect().bottom <= 0) {
+          el.classList.add('in');
+          grow(el);
+          $$('[data-to]', el).forEach(function (n) { n.textContent = n.textContent; });
+          io.unobserve(el);
+        }
+      });
+    }
+    addEventListener('scroll', function () {
+      if (!queued) { queued = true; requestAnimationFrame(sweep); }
+    }, { passive: true });
+    addEventListener('hashchange', sweep);
+    addEventListener('load', sweep);
+    sweep();
+
+    var navIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) markCurrent(en.target); });
+    }, { rootMargin: '-56px 0px -72% 0px' });
+    targets.forEach(function (t) { if (t) navIo.observe(t); });
+  } else {
+    $$('.reveal').forEach(function (el) { el.classList.add('in'); });
+    grow(document);
+  }
+
+  /* -- open a card's record when linked from the chart ------ */
+  function openTarget() {
+    var id = location.hash.slice(1);
+    if (!id) return;
+    var card = document.getElementById(id);
+    if (card && card.classList.contains('card')) {
+      card.hidden = false;
+      var d = $('.detail', card);
+      if (d) d.open = true;
+    }
+  }
+  window.addEventListener('hashchange', openTarget);
+  openTarget();
+
+  /* -- filtering -------------------------------------------- */
+  var cards = $$('.card'), q = $('#q'), fstat = $('#fstatus'), none = $('#noresults');
+  var state = { status: 'all', domain: 'all', text: '' };
+
+  function apply() {
+    var shown = 0, per = { ok: 0, gaps: 0 };
+    cards.forEach(function (c) {
+      var okStatus = state.status === 'all' || c.getAttribute('data-status') === state.status;
+      var okDomain = state.domain === 'all' ||
+        c.getAttribute('data-domains').split('|').indexOf(state.domain) > -1;
+      var okText = !state.text || c.getAttribute('data-text').indexOf(state.text) > -1;
+      var vis = okStatus && okDomain && okText;
+      c.hidden = !vis;
+      if (vis) { shown++; per[c.getAttribute('data-status')]++; }
+    });
+    $$('.group').forEach(function (g) {
+      var key = g.id.replace('g-', '');
+      g.hidden = per[key] === 0;
+      var n = $('.gcount', g);
+      if (n) n.textContent = per[key] + ' / 13';
+    });
+    none.hidden = shown > 0;
+    fstat.innerHTML = 'Showing <b>' + shown + '</b> of 13';
+  }
+
+  function resetChips() {
+    $$('.chipbtn[data-f]').forEach(function (o) {
+      o.setAttribute('aria-pressed', String(o.getAttribute('data-v') === 'all'));
+    });
+  }
+
+  $$('.chipbtn[data-f]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-f');
+      state[f] = b.getAttribute('data-v');
+      $$('.chipbtn[data-f="' + f + '"]').forEach(function (o) {
+        o.setAttribute('aria-pressed', String(o === b));
+      });
+      apply();
+    });
+  });
+
+  var timer;
+  q.addEventListener('input', function () {
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      state.text = q.value.trim().toLowerCase();
+      apply();
+    }, 140);
+  });
+
+  $$('.techlist-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var t = b.getAttribute('data-tech');
+      q.value = t;
+      state = { status: 'all', domain: 'all', text: t.toLowerCase() };
+      resetChips();
+      apply();
+      $('#projects').scrollIntoView({ behavior: calm.matches ? 'auto' : 'smooth', block: 'start' });
+    });
+  });
+
+  $('#clearf').addEventListener('click', function () {
+    q.value = '';
+    state = { status: 'all', domain: 'all', text: '' };
+    resetChips();
+    apply();
+    q.focus();
+  });
+})();
+</script>
 
 </body>
 </html>
